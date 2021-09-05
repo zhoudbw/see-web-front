@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <!--使用jQuery的第一步，引入jQuery文件-->
+    <script src="js/jquery-3.6.0.js"></script>
+    <!--jQuery代码的书写位置-->
+    <script>
+        // jquery-3.6.0.js这个库为我们提供了一个对象 jQuery
+        // 我们所有的操作都是jQuery这个对象身上的，所有的jQuery的属性也好，方法也好，都是这个对象身上的。
+        console.log(jQuery)
+        // 对jQuery对象还提供了另一种写法，这个写法也是今后经常使用的
+        console.log($ == jQuery)  // true
+
+        /*那么我们的代码应该放在哪里呢？
+        jQuery给我们提供了一个方法——ready("我们的代码"),这个方法是作用在document身上的
+        根据传递进去的参数的不同，jQuery做的事情是完全不一样。
+        现在：$(document)，传递的是document的对象，此时就表示获取到这个document对象了。
+        */
+        $(document).ready(function () {
+            var box = document.getElementById("box");
+            console.log(box);
+        });
+        /*现在<script>标签是放置在dom元素的上方，如果我们需要获取这个dom元素需要使用window.onload(),或者说其他的方式获取，总是不能够直接获取。*/
+        //    如果我们现在这么写:
+        //     <script>
+        //          var box = document.getElementById("box");
+        //          console.log(box);
+        //     </>是不会奏效的
+        /*由此我们可以知道jQuery的ready()方法是有 window.onload()的效果的。*/
+
+        // ** 上述方法的其他写法1：
+        $().ready(function () {
+            var box = document.getElementById("box");
+            console.log(box);
+        });
+
+        // ** 上述方法的其他写法2：
+        $(function () {
+            var box = document.getElementById("box");
+            console.log(box);
+        });
+        // 从上述代码可知，>>>>> $ <<<<< 的意义真的是十分的重大。
+    </script>
+</head>
+
+<body>
+<div id="box"></div>
+</body>
+</html>

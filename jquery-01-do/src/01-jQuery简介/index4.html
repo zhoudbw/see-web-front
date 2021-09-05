@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--jQuery特点-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+</head>
+<body>
+
+    <!--特点1： jQuery强大的选择器 -->
+    <ul id="ul-id" class="ul-class">
+        <li>red</li>
+        <li>green</li>
+        <li name="blue">blue</li>
+        <li name="yellow">yellow</li>
+    </ul>
+    <script>
+        // 通过jQuery的选择器获取第一个li元素
+
+        /*第一种方式*/
+        var li = $("ul li:nth-child(1)");
+        // 只设置一条css样式，可以不用写{},直接给key,value对即可
+        li.css("background", "red");
+
+        /*第二种方式*/
+        var li2 = $("#ul-id li:first-child");
+        li2.css("background", "pink");
+
+        /*第三种方式，选择第二个li*/
+        var li3 = $(".ul-class li:first-child + li");
+        li3.css("background", "green");
+
+        /*第三种方式，选择第三个li*/
+        var li4 = $("li[name=blue]");
+        li4.css("background", "blue");
+
+        /**
+         *其实上述写法就相当于是： document.querySelector("选择")
+         * 这里的 "选择" 可以用上述写法的任何一个表达式替换
+         * querySelector()中放的是css3的选择器，当然css2也没有问题
+         *但是，jQuery中的选择器更加的强大，jQuery支持的选择器querySelector()是不一定支持的
+         */
+        var li5 = document.querySelector("li[name=yellow]");
+        li5.style.background="yellow";
+    </script>
+
+
+    <!--特点2： 链式操作-->
+    <p class="text"></p>
+    <p class="content"></p>
+    <script>
+        // 选择class=text的元素，通过.html()【相当于innerHTML属性】设置文本
+        $(".text").html("呆小甜");
+        /**
+         *链式操作，就是可以叠加操作。通过 .xxx的方式可以一直叠加操作。 
+         */
+        $(".content").html("胖小甜").css("border", "5px solid pink").width(200).height(200).css("background", "purple");
+        /**
+         *那么链式操作的原理是什么呢？
+         * jQuery中封装的所有方法都有一个返回值，返回的就是通过选择器取到的对象。
+         * 也就是说_ .html()的返回值为$(".contetent")
+         *          .css()的返回值为$(".contetent")
+         *          .xxx()的返回值都是选择器选择到的对象。
+         * 其实链式操作的原理很简单，就是通过return来搞定的。
+         */
+    </script>
+</body>
+</html>

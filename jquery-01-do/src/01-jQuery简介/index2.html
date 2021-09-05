@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+    <script>
+        // -- 思考：$().ready 和 window.load有区别吗？--
+
+        // jQuery
+        $(document).ready(function () {
+            console.log("ready finished ... ");
+        });
+        // JS
+        window.onload = function () {
+            console.log("load finished ... ");
+        };
+        /**
+         *执行结果：
+         * ready finished ...
+         * load finished ...
+         * jQuery的ready 先于 JS的window.load()
+         *
+         *说明：
+         *  ready()在页面中的dom元素加载完了就会执行。
+         *  像<script src="xxx"> <img src="xxx">等等标签引入外部资源，引入过程ready()是不管的。
+         *  只要将页面中的这些标签加载好了，ready()就执行了。
+         *
+         *  window.load()却不是，load()是在页面资源全部下载完毕才会执行（包括我们引入的外部文件的）。
+         *  所以说load()方法会比较慢，而且当某个资源加载不出来来的时候，会影响整个页面的性能（一直在请求这个资源，直到最终超时才资源才算是加载完毕）。
+         */
+
+        // DOMContentLoaded事件，这个事件只能通过addEventListener添加，
+        // 对应function(){}作为执行该事件的具体执行操作。
+        document.addEventListener("DOMContentLoaded", function () {
+            console.log("DOMContentLoader finished ...");
+        });
+        /**
+         *执行结果：
+         * DOMContentLoader finished ...
+         * ready finished ...
+         * load finished ...
+         *
+         *说明：
+         * 从该事件的名字就可以知道，是页面的 dom内容加载完毕执行。
+         * 本质上和$().ready()是一致的，不过两者有一个先后关系。
+         * DOMContentLoader 先于 $().ready()。
+         * 但是如果两者是一样的，那么$().ready()在前，不是应该先执行吗？
+         * 虽然是这么说，但是$().ready()就是通过DOMContentLoader实现的，
+         * 但是$().ready()还做了很多的其他事情，所以DOMContentLoader就执行靠前了。
+         *
+         * 有jQuery了还用原生干嘛呢，所以使用$().ready()就好了。吧
+         */
+    </script>
+</head>
+<body>
+<div id="box"></div>
+<!---这是一个无效的图片地址-->
+<img src="http://www.google.com/1.jpg" alt="">
+</body>
+</html>

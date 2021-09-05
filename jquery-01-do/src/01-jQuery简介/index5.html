@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!--原生JS获取到的对象与jQuery获取到的对象有什么不同-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+</head>
+<body>
+    <h1>Hello.</h1>
+
+    <!--原生JS获取到的对象与jQuery取到的对象的对比-->
+    <script>
+        var h1 = document.querySelector("h1");
+        var $h1 = $("h1");
+        console.log(h1 == $h1); // false
+        
+        console.log(h1); // <h1>Hello.</h1>
+        console.log($h1); // jQuery.fn.init [h1, prevObject: jQuery.fn.init(1)] 数组。
+
+        h1.style.color="red"; // 原生JS设置css样式的方式
+        $h1.css("color", "green"); // jQuery设置css样式的方式
+
+        // 那么如下这么写可以吗？
+        // h1.css("color", "red"); // 报错：Uncaught TypeError: h1.css is not a function。原生的JS对象不能使用jQuery里的方法
+        // $h1.style.color = "green"; // 报错：Uncaught TypeError: Cannot set property 'color' of undefined。jQuery对象也不能使用原生JS的方法
+
+        // 那么两者能不能相互转换呢？ 可以的。
+        /*原生JS转jQuery，将原生JS对象放入$()中*/
+        $(h1).css("color", "blue");
+        /*jQuery转原生JS，由于jQuery对象是一个数组，直接通过下标的形式获取即可*/
+        $h1[0].style.color="purple";
+    </script>
+</body>
+</html>
