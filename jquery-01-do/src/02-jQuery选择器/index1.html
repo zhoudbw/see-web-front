@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--基础选择器-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        ul{
+            width: 500px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        li{
+            padding: 20px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <!--基础选择器-->
+    <ul id="list1">
+        <li>red</li>
+        <li class="red">red</li>
+        <li>red</li>
+        <li>red</li>
+        <li>red</li>
+    </ul>
+    <ul id="list2">
+        <li>red</li>
+        <li>red</li>
+        <li class="red">red</li>
+        <li>red</li>
+        <li>red</li>
+    </ul>
+    <p class="red">red</p>
+
+    <script src="js/jquery-3.6.0.js"></script>
+    <!--/*选择器都是放在$()中*/-->
+    <script>
+        // 基础选择器
+        // 注意选择器选择到的对象是一个集合（数组），即使id选择器只选择中了一个，那也是集合。
+        $("#list1").css("background", "green");    // id选择器，       表达式为 #id值
+        $(".red").css("background", "grey");       // class选择器，    表达式为 .class值
+        $("li").css("border", "5px solid pink");   // 标签选择器，    　表达式为 标签值
+        // $("*").css("border", "2px solid orange");  // 通配符选择器，    表达式为 *
+        $("li, p").css("color", "hotpink");         // 群组选择器 　     表达式为 选择器表达式1,选择器表达式2,选择器表达式3,...
+    </script>
+</body>
+</html>

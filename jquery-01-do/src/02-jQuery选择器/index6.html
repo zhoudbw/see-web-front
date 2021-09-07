@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!--内容过滤选择器-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+</head>
+<body>
+    <!--内容过滤选择器-->
+    <div id="content">tian</div>
+    <div></div>
+    <div id="has">
+        <div>
+            <p>段落</p>
+        </div>
+    </div>
+    <div>
+        <h1 id="title">大标题</h1>
+    </div>
+
+    <script>
+        // 内容过滤选择器
+        $("#content:contains(tian)").css("color","blue"); // 选择id=content的元素，并且该元素包含 “tian”这个内容
+        $("div:empty").css({
+            width:"100px",
+            height:"100px",
+            background:"green"
+        }); // 选择div元素，并且div元素是空的（什么内容都没有）
+        $("#has:has(p)").css("border", "1px solid blue"); // 选择id=has的元素，并且有p元素。（有就行，不用管是儿子还是孙子）
+        $("#title:parent").css("border", "1px solid #f00"); // 选择id=title的元素的父级元素。 
+    </script>
+</body>
+</html>

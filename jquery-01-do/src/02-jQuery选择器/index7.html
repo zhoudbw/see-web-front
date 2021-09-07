@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--表单过滤选择器-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+</head>
+<body>
+    <!--表单过滤选择器-->
+    <input type="button" value="按钮1">
+    <button>按钮2</button>
+    <div id="sex">
+        <input type="checkbox">男
+        <input type="checkbox">女
+    </div>
+    <div>
+        <input type="checkbox" checked>男
+        <input type="checkbox">女
+    </div>
+    <script>
+        // 表单过滤选择器
+        $(":button").css("border", "2px solid #f0f") // 选择所有的按钮，包括<button>、<input type="button">
+        /* 选择id=sex且input的type=checkbox的元素，由于 checkbox是没有办法直接设置元素的，所以我们通过warp()方法，在checkbox外面包一层父级<span>
+            那么现在就是这样：<span style="border: 2px solid purple;"><input type="checkbox"></span> 。
+            还需要注意的是，jQuery的链式操作还是操作选择中的元素，这里选择到的是checkbox是不能设置元素的，我们要获取其父元素，通过parent()方法，
+            然后为其父元素设置css样式*/
+        $("#sex input:checkbox").wrap("<span></span>").parent().css("border", "2px solid purple");
+        $(":checked").wrap("<span></span>").parent().css("border", "2px solid pink") // 选择已经被选中的复选框
+        /*还有很多，直接查文档就好了。*/
+    </script>
+</body>
+</html>

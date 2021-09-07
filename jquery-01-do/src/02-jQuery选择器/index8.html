@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--可见性过滤选择器-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            margin: 5px;
+            border: 3px solid green;
+            float: left;
+        }
+
+        .is-hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!--
+        $(":hidden")选择所有隐藏的元素
+            元素可以被认为是隐藏的几个情况：
+                CSS display值是none。
+                type="hidden"的表单元素。
+                宽度和高度都显式设置为0。
+                一个祖先元素是隐藏的，因此该元素是不会在页面上显示。
+            元素visibility: hidden或opacity: 0被认为是可见的，因为他们仍然占据布局空间。
+
+        $(":visible")选择所有可见的元素
+            如果元素中占据文档中一定的空间,元素被认为是可见的。可见元素的宽度或高度，是大于零。
+            元素的visibility: hidden 或 opacity: 0被认为是可见的，因为他们仍然占用空间布局。
+    -->
+    <button>显示不可见div</button>
+    <!--可见的div-->
+    <div></div>
+    <div></div>
+    <div></div>
+    <!--不可见的div-->
+    <div class="is-hidden"></div>
+    <div style="display:none;"></div>
+    <script>
+        // 选择可见的div元素，点击时背景色变为粉色
+        $("div:visible").click(function () {
+            $(this).css("background", "pink");
+        });
+        // 点击按钮,见不可见div以动画形式显示出来
+        $("button").click(function () {
+            $("div:hidden").show("fast");
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--层级选择器-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+    <style>
+        body{
+            padding-bottom: 1000px;
+        }
+    </style>
+</head>
+<body>
+    <!--层级选择器-->
+    <div>
+        <a href="#" class="link">链接</a>
+        <a href="#">链接</a>
+        <a href="#">链接</a>
+        <a href="#">链接</a>
+        <p>
+            <a href="#">链接</a>
+        </p>
+    </div>
+    <script>
+        // 层级选择器、 包含选择器、子元素选择器
+        $("div a").css("color", "green"); // 表示选择div下的a元素。               空格表示下级的含义。可以是下一级，下两级，下三级...
+        $("div>a").css("color", "red");   // 表示选择div下一级的a元素（儿子）。     大于表示下级的含义。只可以是下一级。
+        $("div a.link + a + a").css("color", "purple");//表示选择div下的class=link的a元素的下一个a元素。 加号表示同级且同类型（换言之也就是将选中的a元素向后平移1个）
+        $("div a.link ~ a").css("color", "blue");//表示选择div a.link下的所有同级的a元素。 波浪号表示选择同级(兄弟)标签下的所有指定元素
+    </script>
+</body>
+</html>

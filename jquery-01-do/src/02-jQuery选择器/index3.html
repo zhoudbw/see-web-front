@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--属性选择器-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+    <style>
+        li {
+            padding: 20px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <!--属性选择器-->
+    <ul id="ulColor">
+        <li class="red">color</li>
+        <li title="blue">color</li>
+        <li title="css-1">color</li>
+        <li id="color1-green">color</li>
+        <li id="red-1color">color</li>
+        <li lang="encnhk">color</li>
+        <li lang="en cn">color</li>
+        <li class="cl" name="tianben">color</li>
+    </ul>
+
+    <script>
+        // 属性选择器
+        $("#ulColor li[class]").css("background", "pink"); // 找到id=ulColor下有class属性的li
+        $("#ulColor li[title=blue]").css("background", "blue"); // 找到id=ulColor下属性class等于blue的li
+        $("#ulColor li[title!=blue]").css("background", "yellowgreen"); // 找到id=ulColor下属性title不等于blue的li
+        $("#ulColor li[title|=css]").css("background", "darkgreen"); // 找到id=ulColor下属性title的值以css为前缀的li。前缀 xxx- 必须有横线才是前缀
+        $("#ulColor li[id^=color]").css("background", "hotpink"); // 找到id=ulColor下的id的值以color开头的li。
+        $("#ulColor li[id$=color]").css("background", "purple"); // 找到id=ulColor下的id的值以color结尾的li。
+        $("#ulColor li[lang*=cn]").css("background", "olive"); // 找到id=ulColor下的属性lang的值包含cn的li。
+        $("#ulColor li[lang~=cn]").css("background", "skyblue"); // 找到id=ulColor下的属性lang的值包含cn这个单词(也就是说必须有空格分隔)的li。
+        $("#ulColor li[class=cl][name=tianben]").css("background", "teal"); // 找到id=ulColor下的属性class=cn且name=tianben的li。-> 条件更严格了。
+    </script>
+</body>
+</html>

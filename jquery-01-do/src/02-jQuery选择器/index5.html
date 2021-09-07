@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--子元素过滤器-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+</head>
+<body>
+    <!--子元素过滤器-->
+    <div id="paragraph">
+        <p>1 段落</p>
+        <p>2 段落</p>
+        <span>3 段落</span>
+        <p>4 段落</p>
+        <span>5 段落</span>
+        <p>6 段落</p>
+        <span>7 段落</span>
+    </div>
+    <div id="only">
+        <p>唯一的一个子元素</p>
+    </div>
+    <div id="only-two">
+        <span>span</span>
+        <p>p</p>
+    </div>
+    
+    <script>
+        // 子元素过滤器 格式： 选择中的元素:过滤条件
+        $("#paragraph p:first-child").css("color", "pink"); // 从选择中的p元素中选择第一个子元素，而且这个子元素在原位置中是第一位。（条件很严格） 
+        $("#paragraph span:first-of-type").css("color", "yellowgreen"); // 选择到父级下的第一个span元素，不需要严格第一位，是第一个出现的就行。
+
+        $("#paragraph span:last-child").css("color", "darkgreen"); // 最后一个span元素。（条件很严格） 
+        $("#paragraph p:last-of-type").css("color", "hotpink"); // 最后一个p元素。（条件不严格）
+
+        $("#paragraph p:nth-child(2)").css("color", "purple"); // 选择到第二个子元素，但是第二个子元素必须是p元素（条件严格）
+        $("#paragraph span:nth-of-type(2)").css("color", "olive"); // 选择到第二个子元素（条件不严格）
+
+        $("#only p:only-child").css("color", "skyblue"); // 当该父级元素的子元素只有唯一一个时，该子元素可以被选择（挑剔）。
+
+        $("#only-two span:only-of-type").css("color", "teal"); // 该父级元素的子元素可以有多个，但是被选择的子元素只能有一个（宽松挑剔）。
+    </script>
+</body>
+</html>

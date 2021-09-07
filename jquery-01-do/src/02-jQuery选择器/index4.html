@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--基础过滤选择器-->
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+    <style>
+        li {
+            padding: 20px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <!--基础过滤选择器  相当于if(){if(){}}if中又嵌套了一个if条件。
+    从一堆中再过滤。-->
+    <ol id="olColor">
+        <li>color</li>
+        <li>color</li>
+        <li>color</li>
+        <li lang="en">color</li>
+        <li id="tar">color</li>
+        <li>color</li>
+        <li>color</li>
+        <li>color</li>
+        <h1>h1</h1>
+        <h2>h2</h2>
+        <h3>h3</h3>
+        <h4>h4</h4>
+    </ol>
+    <script>
+        // 基础过滤选择器 /* 格式：选择到的元素:过滤条件 */
+        // 索引值从0开始， eq = equal、gt = great than、 lt = less than
+        $("#olColor li:eq(1)").css("border", "5px solid pink"); // 得到id=olColor元素下的所有li元素 :(过滤) 索引值等于1的li元素
+        $("#olColor li:gt(1)").css("border", "5px solid grey"); // 得到id=olColor元素下的所有li元素 :(过滤) 索引值大于1的li元素
+        $("#olColor li:lt(1)").css("border", "5px solid yellowgreen"); // 得到id=olColor元素下的所有li元素 :(过滤) 索引值小于1的li元素
+        // 过滤选择器其实就是冒号(:)，左边是选择到的元素，右边是过滤的条件。
+
+        $("#olColor li:not(#olColor li:eq(2))").css("border", "5px solid darkgreen"); // not(选择中的元素)，表示排除。排除传递在not(选择中的元素)。这里除了索引为2的li，其他的都被选择中了。
+        $("#olColor li:even").css("border", "5px solid hotpink"); // 选择索引为偶数的li元素
+        $("#olColor li:odd").css("border", "5px solid purple"); // 选择索引为奇数的li元素
+        $("#olColor li:first").css("border", "5px solid olive"); // 选择第一个li元素
+        $("#olColor li:last").css("border", "5px solid skyblue"); // 选择最后一个li元素
+        $("#olColor li:lang(en)").css("border", "5px solid teal"); // 选择指定语言的所有元素，也就是有通过lang属性指定语言。
+        $("#olColor li:target(tar)").css("border", "5px solid yellow"); // 选择锚点，通过id属性来定位。想要看到锚点效果，访问：http://127.0.0.1:5500/src/02-jQuery选择器/index4.html#tar
+
+        $(":root").css("border", "8px solid blue"); // 选择根节点，也就是html元素。
+        $(":header").css("border", "5px solid darkgreen"); // 选择h元素，也就是<h1><h2>...
+    </script>
+</body>
+</html>
