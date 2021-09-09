@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+</head>
+<body>
+    <!--删除元素-->
+    <div class="del">
+        <div class="title1">标题1</div>
+        <div class="title2">标题2</div>
+        <ul>
+            <li>red</li>
+            <li>green</li>
+            <li>blue</li>
+        </ul>
+        <div class="end1">底部1</div>
+        <div class="end2">底部2</div>
+    </div>
+    <script>
+        // 删除所选中的元素本身
+        $(".del .title1").remove();
+        // 从所选中的元素中，通过选择器表达式确定唯一一个元素进行删除
+        $("div").remove(".title2");
+        // 清空子元素，将所选元素的子元素清除 (和unwrap()完全相反，unwrap()删除的是父级元素)
+        $(".del ul").empty();
+        /**
+         * detach()和remove()都是用来删除元素的，
+         * 那么detach()和remove()的区别呢？演示如下。
+         */
+        // 为选择的元素添加点击事件
+        $(".del .end1").click(function() {
+            alert(1);
+        });
+        $(".del .end2").click(function() {
+            alert(2);
+        });
+        // 删除 .end1和.end2元素，并用变量将其接收
+        var end1 = $(".del .end1").detach();
+        var end2 = $(".del .end2").remove();
+        // 设置异步，3秒后自动将其删除的end1和end2添加回来
+        setTimeout(function() {
+            $(".del").append(end1);
+            $(".del").append(end2);
+        }, 3000);
+        // 添加回来的两个end元素，和原先相比有如下特征：
+        // end1(即detach()删除的元素)，重新添加回来绑定的方法可用
+        // end2(即remove()删除的元素)，重新添加回来绑定的方法不可用
+    </script>
+</body>
+</html>

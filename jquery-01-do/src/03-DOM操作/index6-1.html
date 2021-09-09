@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+</head>
+<body>
+    <!--属性操作-通用属性操作-->
+    <div class="attr">
+        <img src="images/img_01.jpg" alt="" tian="dai">
+        <img src="images/img_02.png" alt="" tian="dai">
+        <input type="text" value="这是一个正经的输入框">
+    </div>
+    <script>
+        // 属性操作-通用属性操作
+        /**
+         * attr()方法既可以设置属性又可以取属性值
+         */
+        // 获取选中元素的src属性的值 (不管选中了多少个img元素，获取到的属性值是第一个img的。)
+        console.log($(".attr img").attr("src")); // 执行结果：images/img_01.jpg
+        // 为选中元素添加title属性及其值 (会把属性添加到所有选中的元素的身上)
+        $(".attr img").attr("title", "狗头"); // <img src="images/img_01.jpg" alt="" tian="dai" title="狗头">
+                                         　   // <img src="images/img_02.png" alt="" tian="dai" title="狗头">
+        // 同时设置多个属性
+        $(".attr img").attr({
+            class:"cute",
+            alt:"动物"
+        });
+
+        /**
+         * prop()方法既可以设置属性又可以取属性值
+         * 但是和attr有很大的区别。
+         * attr()方法，既可以获取自定义属性的值，也可以获取标签本身的属性的值
+         * prop()方法，只能够获取标签本身的属性的值，而补鞥呢获取自定义属性的值
+         * attr()方法，属性的添加可以体现在DOM标签和DOM对象上
+         * prop()方法，属性的添加只会体现在DOM对象上，而不会体现在DOM标签上
+         * 
+         * removeAttr()方法，既能删除DOM对象身上的属性，也能删除DOM标签身上的属性
+         * removeProp()方法，只能删除DOM对象身上的属性
+         */
+        console.log($(".attr img").prop("src")); // 执行结果：http://127.0.0.1:5500/src/03-DOM操作/images/img_01.jpg
+        console.log(
+            $(".attr img").attr("tian"),  // dai
+            $(".attr img").prop("tian")   // undefined
+        );
+        $(".attr img").prop({
+            id:"food",
+            tian:"daidai",
+        });// 执行结果：<img src="images/img_01.jpg" alt="动物" tian="dai" title="狗头" class="cute" id="food">
+           //         <img src="images/img_02.png" alt="动物" tian="dai" title="狗头" class="cute" id="food">
+           // 由此可知，id设置成功了，但是tian没有设置成功。id不是自定义属性设置成功了，tian是自定义属性设置失败了。
+           // 实际上，属性tian虽然没有像id一样设置在DOM标签上，但是属性tian设置在了DOM对象上，我们如果取该对象的属性值打印是可以看出来的。
+        $(".attr img").attr("tian", "daidaidai"); 
+           // 执行结果：<img src="images/img_01.jpg" alt="动物" tian="daidaidai" title="狗头" class="cute" id="food">设置在了DOM标签上
+        
+        $(".attr img").removeAttr("tian"); // 从DOM标签中移除tian属性
+        $(".attr img").removeProp("id"); // 删除的是DOM对象上的tian属性，而不是删除DOM标签上的id属性
+
+        $(".attr img").prop("index", 5); // 将index=5这个属性添加到DOM对象身上
+        console.log($(".attr img").prop("index")); // 5 
+
+        $(".attr img").removeProp("index");
+        $(".attr img").removeProp("alt");
+        console.log($(".attr img").prop("index")) // undefined
+        console.log($(".attr img").prop("alt")) // 动物
+        $(".attr img").removeAttr("alt");
+        console.log($(".attr img").prop("alt")) // 空字符串
+        console.log($(".attr img").attr("alt")) // undefined
+
+        /**
+         * val()获取表单元素的值，其他元素一般也没有value属性 
+         * 同样val()也是可以设置的
+         */
+        console.log($(".attr input").val()); // 这是一个正经的输入框
+        $(".attr input").val("这不是一个输入框"); // 修改选中表单元素的value值
+    </script>
+</body>
+</html>

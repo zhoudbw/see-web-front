@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+</head>
+<body>
+    <!--插入元素，内部插入-->
+    <div class="insideAdd">
+        <p>在内部插入元素</p>
+    </div>
+    <p class="outside">在insertAdd外部</p>
+    <script>
+        // 插入元素，内部插入
+        /**
+         * 执行了下面方法之后，生成的html代码如下：
+         * <div class="insideAdd">
+         *     <p>在内部插入元素</p>
+         *     <!--创建了一个h2元素-->
+         *     <h2>append方法内部插入</h2>
+         * </div>
+         */ 
+        $(".insideAdd").append('<h2>append()方法内部插入</h2>');
+
+        /**
+         * 执行了下面方法之后，相当于是将选择中的元素，剪切插入到元素内部。生成的html代码如下：
+         * <div class="insideAdd">
+         *     <p>在内部插入元素</p>
+         *     <h2>append()方法内部插入</h2>
+         *     <!--该元素来自页面本身-->
+         *     <p class="outside">在insertAdd外部</p>
+         * </div>
+         */
+        $(".insideAdd").append($(".outsideP"));
+
+        /**
+         * appendTo()插入到。和append()插入。刚好相反。
+         * append()是先找到父级元素，然后传递子元素参数，表示将子元素插入父元素。
+         * appendTo()是先找到子元素，然后传递父元素参数，标记将子元素插入到父元素。
+         *    注意：appendTo()传递的参数是"选择器表达式"
+         */
+        $("<h2>appendTo()方法内部插入</h2>").appendTo(".insideAdd");
+
+        /**
+         * append()、appendTo()都是插入到已有元素的后面。
+         * 而prepend()是插入到已有元素的前面。prepend()语法与append()一致。 
+         * prepend()生成的html代码如下：
+         * <div class="insideAdd">
+         *    <h2>prepend()方法内部插入</h2>
+         *    <p>在内部插入元素</p>
+         *    <h2>append()方法内部插入</h2>
+         *    <h2>appendTo()方法内部插入</h2>
+         * </div>
+         */
+        $(".insideAdd").prepend("<h2>prepend()方法内部插入");
+
+        /**
+         * prependTo()也是插入到已有元素的前面。prependTo()语法与appendTo()一致。
+         */
+        $("<h2>prependTo()方法内部插入</h2>").prependTo(".insideAdd");
+    </script>
+</body>
+</html>

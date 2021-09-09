@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+</head>
+<body>
+    <!--克隆与替换元素-->
+    <div class="clone">
+        <p>这是一段要被克隆的文字</p>
+        <h2 class="replaceAll">这是一段要主动替换的文字</h2>
+        <div class="name1">呆小甜</div>
+        <div class="name2">胖小甜</div>
+        <h2 class="replaceWith">这是一段要被动替换的文字</h2>
+    </div>
+    <script>
+        // 克隆与替换元素
+        /**
+         * 为需要克隆的元素绑定点击事件。
+         * 克隆方法没有那么强大，需要自己将克隆的元素添加到页面中。
+         * 此时我们会发现，克隆出来的元素，点击事件不可用。由此说明：克隆其实是不完整的。
+         * 如果想要完整的克隆，那么需要传递参数 .clone(true)
+         */
+        $(".clone p").click(function() {
+            alert(3);
+        });
+        $(".clone p").clone().appendTo(".clone");
+        // 执行这个时候，会找到两个 .clone p 的元素，因为已经克隆了一次，所以就出现了三个相同元素。
+        $(".clone p").clone(true).appendTo(".clone");
+
+        /* 主动替换，谁(要替换的元素)替换了我(要被替换的元素) */
+        // 创建标签替换已有的标签
+        $("<h3>使用replaceAll()主动替换</h3>").replaceAll(".clone .replaceAll");
+        // 使用已有的标签替换已有的标签（使用name2替换name2，此时name2相当于被剪切了）
+        $(".clone name2").replaceAll(".clone .name1");
+        /*被动替换 我被谁替换了*/
+        $(".clone .replaceWith").replaceWith("<h3>使用replaceWith()被动替换</h3>")
+    </script>
+</body>
+</html>

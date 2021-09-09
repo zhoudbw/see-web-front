@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+</head>
+<body>
+    <!--包裹元素-->
+    <div class="wrap">
+        <span>red</span>
+        <span>green</span>
+        <span>blue</span>
+    </div>
+    <script>
+        // 包裹元素
+        /**
+         * 为所有选中的元素，逐个包裹一个父级元素。执行后代码如下：
+         *  <li><span>red</span></li>
+         *  <li><span>green</span></li>
+         *  <li><span>blue</span></li>
+         * 增加了<li>包裹在外面
+         */
+        $(".wrap span").wrap("<li>");
+
+        /**
+         * 为所有选中的元素，统一包裹一个父级元素。执行后代码如下：
+         * <ul>
+         *     <li><span>red</span></li>
+         *     <li><span>green</span></li>
+         *     <li><span>blue</span></li>
+         * </ul>
+         * 统一在元素外包裹了<ul>
+         */
+        $(".wrap li").wrapAll("<ul>");
+
+        /**
+         * 对所选中的元素的内部元素进行包裹。执行后的代码如下：
+         * <ul>
+         *     <li><span><strong>red</strong></span></li>
+         *     <li><span><strong>green</strong></span></li>
+         *     <li><span><strong>blue</strong></span></li>
+         * </ul>
+         * 对<span>内部元素增加了<strong>包裹
+         */
+        $(".wrap span").wrapInner("<strong>");
+        
+        /**
+         * 删除所选元素的外部包裹元素(unwarp()方法不接任何参数)。执行后的代码如下： 
+         * <li><span><strong>red</strong></span></li>
+         * <li><span><strong>green</strong></span></li>
+         * <li><span><strong>blue</strong></span></li>
+         * 去除了li的外部所有元素的包裹
+         */
+        $(".wrap li").unwrap();
+    </script>
+</body>
+</html>

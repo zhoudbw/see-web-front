@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+</head>
+<body>
+    <!--插入元素 html()与text()方法-->
+    <!--相当于原生JS中的innerHTML与innerText-->
+    <div class="htmlText">
+        <p>html与text方法</p>
+    </div>
+    <script>
+        // html()与text()的用法及区别
+        console.log($(".htmlText").html()); // 执行结果： <p>html与text方法</p>
+        console.log($(".htmlText").text()); // 执行结果： html与text方法
+
+        // html("string")方法会将选择到的元素用传递的string替换，如果string包含html标签，那么标签会被解析。
+        $(".htmlText").html("<h2>这是html()方法添加的标题</h2><p>这是html()方法添加的内容</p>"); // html内容
+        // text("string")方法会将选择到的元素用传递的string替换，如果string包含html标签，不会解析标签。
+        $(".htmlText").text("<h2>这是text()方法添加的标题</h2><p>这是text()方法添加的内容</p>"); // 纯文本
+    </script>
+</body>
+</html>

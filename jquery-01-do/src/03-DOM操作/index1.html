@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+    <style>
+        body{
+            padding-bottom: 1000px;
+        }
+        .red{
+            background: red;
+        }
+        .green{
+            background: green;
+        }
+        .blue{
+            background: blue;
+        }
+        .active{
+            background: greenyellow;
+        }
+    </style>
+</head>
+<body>
+    <!--操作class-->
+    <div class="setClass">
+        <ul>
+            <li>red</li>
+            <!--虽然该元素的class值为green和blue两个值，
+            但是，只会显示出一个class值所表示的样式，
+            其实，是按照出现的先后次序覆盖显示的，所以最终显示的是blue的样式-->
+            <li class="green blue">green</li>
+            <li class="red blue">blue</li>
+        </ul>
+        <p class="active">点击切换class</p>
+    </div>
+    <script>
+        /*操作class*/
+        // 通过选择器选中元素，使用addClass()方法为该元素添加class=red
+        $(".setClass li:first").addClass("red"); 
+        // 使用removeClass()移除所选元素的class值，如果不传递参数将移除所有的class，如果传递参数将移除指定class值
+        $(".setClass li:eq(1)").removeClass("blue");
+        console.log(
+            // 使用hasClass(classValue)监测该元素是否有传递的class值
+            $(".setClass li:last").hasClass("blue"), // true
+            $(".setClass li:last").hasClass("orange"), // false
+        );
+        // 使用toggleClass()方法，对元素的class值实现删除和显示之间的切换
+        $(".setClass p").click(function() {
+            $(this).toggleClass();
+        });
+    </script>
+</body>
+</html>

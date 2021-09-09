@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+</head>
+
+<body>
+    <!--插入元素，外部插入-->
+    <div class="outsideAdd">
+        <h2>在外部插入元素</h2>
+    </div>
+    <script>
+        /*插入元素，外部插入*/
+
+        /**
+         * after()方法和insertAfter()方法的区别与append()方法和appendTo()方法相同
+         * 就是，先选择要插入的位置还是先选择要插入的元素的区别。
+         */
+        // after()方法，将元素添加到所选元素的后面。 
+        $(".outsideAdd h2").after("<p>after()方法添加元素到h2后面");
+        // insertAfter()方法，将元素添加到所选元素的后面。
+        $("<p>insertAfter()方法添加元素到h2后面</h2>").insertAfter(".outsideAdd h2");
+        // before()方法，将元素添加到所选元素的前面。 
+        $(".outsideAdd h2").before("<p>before()方法添加元素到h2前面");
+        // insertBefore()方法，将元素添加到所选元素的前面。
+        $("<p>insertBefore()方法添加元素到h2前面</h2>").insertBefore(".outsideAdd h2"); 
+    </script>
+</body>
+</html>

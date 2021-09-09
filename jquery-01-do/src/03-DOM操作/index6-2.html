@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+    <style>
+        .css{
+            border: 2px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <!--属性操作-css属性-->
+    <div class="css">
+        <h2></h2>
+        <p></p>
+        <div></div>
+    </div>
+    <script>
+        // 属性操作-css属性
+        console.log(
+            // 获取计算后的css属性值
+            $(".css").css("border"), // 2px solid rgb(0, 0, 0)
+            $(".css").css("height"), // 19.9062px
+        );
+        // 通过链式法则来设置css样式
+        $(".css h2").css("width", "200px").css("height", "100px").css("background", "#ccc").text("h2标题");
+        // 设置多个css样式
+        $(".css h2").css({
+            color:"green",
+            fontSize:"20px",
+            "line-height":"100px",
+        });
+
+        // 盒模型的操作
+        $(".css p").css({
+            width:"200px",
+            height:"200px",
+            padding:"20px",
+            margin:"20px auto",
+            border:"2px solid #f00",
+        });
+        console.log(
+            // 获取盒模型尺寸
+            $(".css p").width(),       // 200 width
+            $(".css p").height(),      // 200 height
+            $(".css p").innerWidth(),  // 240 width + padding-left + padding-right
+            $(".css p").innerHeight(), // 240 height + padding-top + paading-bottom
+            $(".css p").outerWidth(),  // 244 width + padding-left + padding-right + border-left + border-right
+            $(".css p").outerHeight(), // 244 height + padding-top + padding-bottom + border-top + border-bottom
+        );
+        // 设置盒模型尺寸
+        // 设置innerWidth()的时候，border的大小不改变，改变的是width的值
+        // 设置outerWidth()的时候，也是一样border和padding都不改变，改变的是width的值
+        // height的相关设置同理。
+        $('.css p').width(300).height(100).innerWidth(400).outerWidth(500)
+
+        // 位置信息的设置
+        $(".css").css("position", "relative");
+        $(".css div").css({
+            width:"100px",
+            height:"100px",
+            background:"green",
+            position:"absolute",
+            left:"100px",
+            top:"200px"
+        });
+        console.log(
+            // offset()是相对于document，也就是我们的html元素来说的。
+            $(".css div").offset().left, // 110 div距离父级100px,body默认margin为8px，再加上自身2px的边框。
+            $(".css div").offset().top,  // 210 
+        );
+        $(".css div").offset({
+            left:200, // left很好理解，就是距离左边document的距离
+            top:1000, // top的理解：因为采用相对于父级进行定位，所以先要获取父级距离document的距离，然后做减法，剩下的值就是相对于父级来说要对子元素设置的值。
+        });
+        console.log(
+            // position()相对于有定位的父级 (这里是相对于div.css来说)
+            // 设置方式和offset()相同
+            $(".css div").position().left, // 190
+            $(".css div").position().top,  // 990
+        );
+        console.log(
+            // 滚动条的位置
+            $(document).scrollTop(),
+            $(document).scrollLeft(),
+        );
+        // 进行一些操作，对滚动条进行设置
+        setTimeout(function(){
+            $(document).scrollTop(300)
+        }, 2000);
+    </script>
+</body>
+</html>
