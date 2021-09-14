@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+    <style>
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        li{
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+        }
+        .mb{
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+    <!--获取兄弟元素-->
+    <!--o获取后面的兄弟元素o-->
+    <ul class="next mb">
+        <li>purple</li>
+        <li>cyan</li>
+        <li>
+            <ul>
+                <li>pink</li>
+            </ul>
+        </li>
+        <p>brown</p>
+        <div>skyblue</div>
+    </ul>
+    <!--o获取后面前面的兄弟元素o-->
+    <ul class="prev mb">
+        <div>skyblue</div>
+        <p>brown</p>
+        <li>
+            <ul>
+                <li>pink</li>
+            </ul>
+        </li>
+        <li>cyan</li>
+        <li>purple</li>
+    </ul>
+    <script>
+        /* o获取后面的兄弟元素o */
+        // next()获取选择到的元素后面第一个元素.
+        // 可以传参固定选择，传参必须是后面第一个元素的类型。
+        $(".next li:first").next("li").css("background", "yellow");
+        // nextAll()获取选择到的元素后面所有的兄弟元素,
+        // 可以传递参数，此时获取到的元素就是指定的条件筛选出来的了。
+        $(".next li:first").nextAll().css("border", "2px solid #000");
+        $(".next li:first").nextAll("p").css("border", "2px solid brown");
+        // nextUntil(”限定条件“)，寻找时，找到限定条件限制的位置就不再找了。
+        // 例子：找到选择元素在限定条件内的元素
+        $(".next li:first").nextUntil("div").css("border", "3px solid orange");
+
+        /* o获取前面的兄弟元素o */
+        // 通过prev()、prevAll()、prevUntil()来获取前面元素
+        // 和next()、nextAll()、nextUntil()对应
+        $(".prev li:last").prev("li").css("background", "cyan");
+        $(".prev li:eq(3)").prevAll("li").css("border", "2px solid #000");
+        $(".prev li:eq(3)").prevUntil("div").css("border", "2px solid orange");
+    </script>
+</body>
+</html>

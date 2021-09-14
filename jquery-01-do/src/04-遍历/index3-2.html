@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+</head>
+<body>
+    <!--获取所有兄弟元素，不区分前后-->
+    <ul class="siblings">
+        <li>red</li>
+        <li class="select">green</li>
+        <li>blue</li>
+        <li class="select">yellow</li>
+        <li>
+            <ul>
+                <li>pink</li>
+            </ul>
+        </li>
+    </ul>
+    
+    <script>
+      $(".siblings li:eq(2)").siblings().css("border", "2px solid skyblue");
+      $(".siblings li:eq(2)").siblings(".select").css("background", "yellow");
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+    <style>
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        li{
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+        }
+        .mb{
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <!--获取后代元素-->
+    <ul class="child mb">
+        <li>red</li>
+        <li>
+            <ul>
+                <li>green</li>
+                <li><span>blue</span></li>
+            </ul>
+        </li>
+        <li><span>yellow</span></li>
+    </ul>
+    <script>
+        // 获取后代元素，仅包括儿子元素，不包括孙子及孙子元素
+        $(".child").children().css("border-color", "green");
+        //　children(选择器)传递参数，用于限定选中子元素，本质就是过滤
+        $(".child").children(":eq(1)").css("border-width", "3px");
+
+        // find()不仅仅知道儿子元素，还找到孙子及孙子之后的元素，这才是真正的获取后代。
+        $(".child").find("span").css({
+            "font-size":"30px",
+            color:"red"
+        });
+        // find()也可以接收参数
+        $(".child").find("span:eq(0)").css({
+            color:"blue",
+        });
+    </script>
+</body>
+</html>

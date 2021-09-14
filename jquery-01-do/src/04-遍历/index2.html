@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+</head>
+<body>
+    <!--获取祖先元素-->
+    <ul class="parent mb" style="position: relative;">
+        <li>
+            <ul>
+                <li>black</li>
+                <li>orange</li>
+                <li>gold</li>
+            </ul>
+        </li>
+        <ii>grey</ii>
+    </ul>
+    <script>
+        // 获取祖先元素，获取到的是所选元素的上一个父元素
+        $(".parent li ul li:first").parent().css("border", "4px solid blue");
+        // 传递元素，限制祖先元素的选择，比如这里，规定找到的父元素为div，显然找不到
+        $(".parent li ul li:first").parent("div").css("border", "4px solid pink");
+
+        // parents()方法，找到所有的祖先元素。区别和find()和children()相同
+        $(".parent li ul li:first").parents().css("border", "2px solid purple");
+        console.log($(".parent li ul li:first").parents().css("border", "2px solid purple")); // 找到的父级元素：0: ul 1: li 2: ul.parent.mb 3: body 4: html
+        // 限制父级的范围
+        $(".parent li ul li:first").parents("ul").css("border", "2px solid yellow");
+        
+        // parentUtil(限制参数)，需要传递参数，限制所能获取的祖先元素的范围，相当于parents()方法传参数
+        $(".parent li ul li:first").parentsUntil("li").css("border", "2px solid blue");
+
+        // 找有定位的父级。找到有距离自己最近的有定位元素的祖先元素，找到便停止。
+        // 如果找不到，继续向上找，最终找到的就是html。和原生JS一样。
+        $(".parent li ul li:first").offsetParent().css("border", "2px solid yellow");
+    </script>
+    <!--获取祖先元素.closest()-->
+    <ul class="closest">
+        <li>
+            <ul>
+                <li>pink</li>
+                <li>green</li>
+            </ul>
+        </li>
+    </ul>
+    <script>
+        // closest()也是用来获取祖先元素的
+        $(".closest li ul li").closest("ul").css("border", "2px solid purple");
+
+        // parents()和closest()的区别：
+        // parents()获取到的祖先元素就是真正意义上的祖先元素，不包括自己。
+        // closest()获取到的元素包括祖先元素也包括自己，不是真正意义上的祖先元素。
+        $(".closest li ul li").parents("li").css("border", "5px solid purple");
+        $(".closest li ul li").closest("li").css("border", "5px solid pink");
+    </script>
+</body>
+</html>
