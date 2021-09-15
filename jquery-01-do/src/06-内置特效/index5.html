@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+    <style>
+        button {
+            color: #fff;
+            font-size: 18px;
+            padding: 5px 10px;
+            background: green;
+            border: none;
+        }
+
+        #box {
+            width: 400px;
+            height: 400px;
+            padding: 20px;
+            margin: 20px;
+            background: #ccc;
+            border: 10px solid green;
+            position: relative;
+            /* 相对定位 */
+        }
+
+        #box img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="animate">自定义动画</button>
+    <button id="animate2">延迟动画</button>
+    <!-- 控制动画 -->
+    <button id="stop">暂停动画</button>
+    <button id="finish">完后动画</button>
+    <div id="box">
+        <img src="images/img_01.jpg" alt="">
+    </div>
+    <script>
+        $("#animate").click(function() {
+            $("#box")
+            .animate({width:200}, 2000)
+            .animate({height:200}, 2000)
+            .animate({opacity:0.5}, 3000);
+        });
+        /** 控制动画 */
+
+        // 停止动画
+        $("#stop").click(function() {
+            $("#box").stop();
+            console.log("暂停动画...");
+        });
+        // 完成动画
+        $("#finish").click(function() {
+            $("#box").finish();
+            console.log("完成动画...");
+        });
+        // 延迟动画
+        $("#animate2").click(function() {
+            $("#box")
+            .animate({width:200}, "fast").delay(2000)
+            .animate({height:200}, "fast")
+            .animate({opacity:0.5}, "fast");
+        });
+    </script>
+</body>
+
+</html>

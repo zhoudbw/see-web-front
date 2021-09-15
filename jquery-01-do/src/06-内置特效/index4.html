@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+    <style>
+        button {
+            color: #fff;
+            font-size: 18px;
+            padding: 5px 10px;
+            background: green;
+            border: none;
+        }
+
+        #box {
+            width: 400px;
+            height: 400px;
+            padding: 20px;
+            margin: 20px;
+            background: #ccc;
+            border: 10px solid green;
+            position: relative;
+            /* 相对定位 */
+        }
+
+        #box img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 自定义动画 -->
+    <button id="animate">自定义动画</button>
+    <button id="animate2">链式操作</button>
+    <div id="box">
+        <img src="images/img_01.jpg" alt="">
+    </div>
+    <script>
+        // 自定义动画
+        /**
+         * animate()有很多的参数，统一将这些参数放置在对象中。
+         */
+        $("#animate").click(function() {
+            $("#box").animate(
+                // 但凡给定的css属性值是数值，那么都能够帮助去运动。都是通过运动的方式去体现改变。。
+                // 该参数内放置的就是能够运动的属性。
+                {
+                    width: 200, // 宽运动为200px
+                    left: "+=50", // 设置了相对定位，图片会向右运动
+                    height: "toggle", // 高度从0变为现在大小，现在大小变为0，来回切换。
+                    "border-radius":50, // 变成圆角
+                }, 
+                // 该参数传递运动持续的时间
+                2000,
+                // 该参数是回调函数，表示动画执行过后执行的方法体
+                function() {
+                    console.log("运动结束...");
+                }
+            );
+        });
+
+        /** 链式操作 */
+        $("#animate2").click(function() {
+            $("#box")
+            .animate({width:200}, "fast")
+            .animate({height:200}, "slow")
+            .animate({opacity:0.5}, 1000);
+        });
+    </script>
+</body>
+
+</html>

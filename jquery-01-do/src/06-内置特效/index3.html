@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+    <style>
+        button {
+            color: #fff;
+            font-size: 18px;
+            padding: 5px 10px;
+            background: green;
+            border: none;
+        }
+
+        #box {
+            width: 400px;
+            height: 400px;
+            padding: 20px;
+            margin: 20px;
+            background: #ccc;
+            border: 10px solid green;
+            position: relative;
+            /* 相对定位 */
+        }
+
+        #box img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 渐变特效 -->
+    <button id="fadeOut">淡出隐藏</button>
+    <button id="fadeIn">淡入显示</button>
+    <button id="fadeToggle">淡出隐藏/淡入显示切换</button>
+    <button id="fadeTo">透明度变化</button>
+    <div id="box">
+        <img src="images/img_01.jpg" alt="">
+    </div>
+    <script>
+        /* 这些特效和前面使用的动画特效，使用方式都一样。 */
+        // 渐变特效
+
+        // 淡出隐藏
+        $("#fadeOut").click(function () {
+            $("#box").fadeOut(function () {
+                console.log("淡出隐藏动画结束...");
+            });
+        });
+        // 淡入显示
+        $("#fadeIn").click(function () {
+            $("#box").fadeIn(function () {
+                console.log("淡入显示动画结束...");
+            });
+        });
+        // 淡出隐藏/淡入显示切换
+        var n = 0;
+        $("#fadeToggle").click(function () {
+            $("#box").fadeToggle("normal", function () {
+                var re = n++ % 2;
+                if (re == 0) { // 隐藏
+                    console.log("淡出隐藏动画结束了。");
+                } else if (re == 1) { // 显示
+                    console.log("淡入显示动画结束了。");
+                }
+            });
+        });
+        // 透明度变化
+        $("#fadeTo").click(function () {
+            // 变化速度  透明度情况  回调函数
+            $("#box").fadeTo("normal", 0.5, function () {
+                console.log("透明度变化完成...");
+            });
+        });
+    </script>
+</body>
+
+</html>
