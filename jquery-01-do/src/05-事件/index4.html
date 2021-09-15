@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+    <style>
+        button {
+            font-size: 20px;
+            color: #fff;
+            line-height: 40px;
+            padding: 0 15px;
+            background: green;
+            border: 1px solid grey;
+        }
+    </style>
+</head>
+<!-- 事件对象 -->
+<!-- 在jQuery中，对JS中的事件对象进行了重新的封装。添加了一些属性，改变了很多的东西。-->
+<button id="btn">jQuery事件对象</button>
+<button id="btn2">JS事件对象</button>
+
+<script>
+    // jQuery事件对象
+    $("#btn").click(function(event) {
+        console.log(event);
+    });
+    // JS事件对象
+    $("#btn2")[0].onclick=function(ev) {
+        console.log(ev);
+    };
+</script>
+<body>
+  
+</body>
+</html>

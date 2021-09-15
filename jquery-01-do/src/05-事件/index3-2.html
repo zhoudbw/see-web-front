@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+    <style>
+        button {
+            font-size: 20px;
+            color: #fff;
+            line-height: 40px;
+            padding: 0 15px;
+            background: green;
+            border: 1px solid grey;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 区别2：执行事件的元素数量 -->
+    <ul id="color">
+        <li>red</li>
+        <li>green</li>
+        <li>blue</li>
+        <li>yellow</li>
+    </ul>
+    <script>
+        // 区别2：trigger()会执行所有选中元素的事件。triggerHandler()只会执行第一个元素的事件。
+        $("#color li").click(function () {
+            // index()方法可以获取到元素的索引。
+            console.log($(this).html() + " " + $(this).index())
+        });
+        // 使用trigger()手动触发
+        setTimeout(function () {
+            $("#color li").trigger("click");
+        }, 2000);
+        // 使用triggerHandler()手动触发
+        setTimeout(function () {
+            $("#color li").triggerHandler("click");
+        }, 2500);
+    </script>
+</body>
+
+</html>

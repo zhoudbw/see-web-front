@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+    <style>
+        button {
+            font-size: 20px;
+            color: #fff;
+            line-height: 40px;
+            padding: 0 15px;
+            background: green;
+            border: 1px solid grey;
+        }
+    </style>
+</head>
+
+<body>
+    <!--手动触发绑定事件：
+    在前面所说的函数都是自动触发的，必须执行该事件对应的操作，然后才可以执行。
+    手动触发绑定事件的含义我们通过一个例子来说明：我们为某个元素绑定点击事件，触发这个事件不通过点击，我们就可以使之触发，这种触发方式就是手动触发绑定事件。-->
+
+    <!--手动触发绑定事件：trigger() / triggerHandler() 这两个方法其实也算绑定触发事件的两个方式-->
+
+    <button id="btn6">trigger触发事件</button>
+
+    <!--trigger与triggerHandler的区别-->
+    <!-- 区别1：默认行为 -->
+    <button id="trigger">trigger</button>
+    <button id="triggerHandler">triggerHandler</button>
+    <br>
+    <input type="text" value="获取焦点">
+    <script>
+        // 使用trigger手动触发绑定事件
+        $("#btn6").on({
+            click: function () {
+                console.log("btn6的点击事件");
+            },
+            mouseover: function (event, name, age) {
+                console.log("btn6的鼠标移入事件：" + name + ":" + age);
+                $(this).css("background", "brown");
+            },
+            end: function () {
+                console.log("这是一个自定义的事件");
+            }
+        });
+
+        // 通过定时器手动的触发绑定事件
+        setTimeout(function () {
+            $("#btn6").trigger("click");
+        }, 500);
+
+        setTimeout(function () {
+            // #btn6的鼠标移入事件有传递了name和age参数。
+            // 通过trigger()传递一个数组，这个数组对应位置对应传入参数的顺序。
+            $("#btn6").trigger("mouseover", ["tian", 3]);
+        }, 1000);
+        // ** 通过trigger()触发自定义事件
+        setTimeout(function () {
+            $("#btn6").trigger("end");
+        }, 1500);
+    </script>
+
+    <script>
+        // 使用triggerHandler手动触发绑定事件
+        // triggerHandler()方法和trigger()方法的行为是一样的。但是有四个方面是不一样的。
+
+        // 区别1：trigger()会触发事件的默认行为；triggerHandler()不会触发事件的默认行为。
+        $("input").focus(function () {
+            console.log("获取到焦点");
+            // 获取焦点时触发。
+            // 该事件哟一个默认行为：当鼠标点击的时候input框会自动获取焦点，获取焦点后就会默认的去触发这个方法。
+            // 点击自动获取焦点就是一个默认行为。
+        });
+        $("#trigger").click(function () {
+            $("input").trigger("focus");
+            // 该方法应该log出两次 ”获取到焦点“
+            // 第一次：trigger()调用 "focus"方法，log一次。
+            // 第二次：trigger()触发“focus”的默认行为“自动获取焦点”，再次log一次。
+        });
+        $("#triggerHandler").click(function () {
+            $("input").triggerHandler("focus");
+            // 该方法之后log一次，只是调用方法log一次。
+            // 没有默认行为，所以不会获取焦点，触发方法。
+        });
+    </script>
+</body>
+
+</html>

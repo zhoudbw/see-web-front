@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+    <style>
+        button {
+            font-size: 20px;
+            color: #fff;
+            line-height: 40px;
+            padding: 0 15px;
+            background: green;
+            border: 1px solid grey;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 区别3：是否冒泡 -->
+    <div id="bubble">
+        <h2><span>呆小甜</span></h2>
+    </div>
+    <script>
+        // 区别3：trigger()会冒泡；triggerHandler()不会冒泡
+        $("#bubble h2").click(function() {
+            console.log("h2被点击了")
+        });
+        $("#bubble span").click(function() {
+            console.log("span被点击了")
+        });
+        /**
+         * 点击“呆小甜”后的执行效果：
+         *     span被点击了
+         *     h2被点击了
+         * 事件会跟着事件流式的一层一层的往上冒泡。
+         */
+        
+         // 通过trigger()触发的效果
+         setTimeout(() => {
+             $("#bubble span").trigger("click");
+         }, 2000);
+         // 通过triggerHandler()触发的效果
+         setTimeout(() => {
+             $("#bubble span").triggerHandler("click");
+         }, 2000);
+    </script>
+</body>
+
+</html>

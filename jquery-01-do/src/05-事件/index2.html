@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+    <style>
+        button {
+            font-size: 20px;
+            color: #fff;
+            line-height: 40px;
+            padding: 0 15px;
+            background: green;
+            border: 1px solid grey;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btn1">事件名称函数</button>
+    <!--解除事件-->
+    <button id="btn5">解除全部事件</button>
+    <button id="btn6">解除mouseover事件</button>
+    <script>
+        $("#btn1").mouseover(function () {
+            $(this).css(
+                "background", "orange"
+            );
+        }).mouseout(function () {
+            $(this).css("background", "grey");
+        });
+
+        // 解除事件 off()
+        $("#btn5").click(function() {
+            $("#btn1").off(); // 没有传递参数会#btn1的所有事件全部解除
+            console.log("事件已全部解除...");
+        });
+
+        $("#btn6").click(function(){
+            $("#btn1").off("mouseover"); // 指定解除哪个事件
+            console.log("mouseover事件已解除...")
+        });
+        
+    </script>
+</body>
+
+</html>

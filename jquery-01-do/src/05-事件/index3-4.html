@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+    <style>
+        button {
+            font-size: 20px;
+            color: #fff;
+            line-height: 40px;
+            padding: 0 15px;
+            background: green;
+            border: 1px solid grey;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 区别4：链式操作 -->
+    <button id="btn">链式操作</button>
+    <br>
+    <br>
+    <button id="btn2">triggerHandler支持链式法则</button>
+    <script>
+        // 区别4：trigger()可以使用链式操作，triggerHandler()不可以使用链式操作。
+        $("#btn").on({
+            mouseover: function() {
+                $(this).css("width", "200px");
+                console.log("become wide...");
+            },
+            mouseout: function() {
+                $(this).css("height", "200px");
+                console.log("become high...");
+            }
+        });
+
+        // trigger()支持链式操作
+        setTimeout(() => {
+            $("#btn").trigger("mouseover").trigger("mouseout");
+            console.log("trigger() 链式操作可执行...");
+        }, 2000);
+
+        // // triggerHandler()不支持链式操作
+        // setTimeout(() => {
+        //     $("#btn").triggerHandler("mouseover").triggerHandler("mouseout");
+        //     // 链式法则不可用，因为trigger()执行完之后返回的是选择到的元素，
+        //     // 而triggerHandler()执行后返回的并不是选中的对象，而是最后一个方法执行的返回值，
+        //     // 在本例中也就是css()执行后返回的对象。
+        // }, 3000);
+
+        /**
+         * 链式法则的关键就在于方法执行完之后，返回的对象还是本身。
+         * 所以想要triggerHandler()能够满足链式法则很简单，就是返回自身对象。
+         */
+         $("#btn2").on({
+            mouseover: function() {
+                $(this).css("width", "200px");
+                console.log("become wide...");
+                return $(this)  // 返回当前对象。没有return返回的就是undefined
+            },
+            mouseout: function() {
+                $(this).css("height", "200px");
+                console.log("become high...");
+            }
+        });
+        // 让triggerHandler()支持链式法则
+        setTimeout(() => {
+            $("#btn2").triggerHandler("mouseover").triggerHandler("mouseout");
+            console.log("triggerHandler() 链式操作可执行...");
+        }, 3000);
+
+    </script>
+</body>
+
+</html>
