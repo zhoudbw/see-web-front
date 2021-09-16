@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+</head>
+
+<body>
+    <!-- post请求 -->
+    <!-- post请求在jQuery中有两种方式，一个是post()方法、一个是ajax()方法，ajax()方法可以指代请求的方式 -->
+    <div id="login">
+        <div>
+            <label for="username">账号</label>
+            <input type="text" name="account">
+        </div>
+        <div>
+            <label for="password">密码</label>
+            <input type="password" name="password">
+        </div>
+        <div>
+            <button id="loginBtn1">登录(post请求)</button>
+            <button id="loginBtn2">登录(ajax post请求)</button>
+        </div>
+    </div>
+
+    <script>
+        // post()方法
+        $("#loginBtn1").click(function () {
+            // 获取input框中的账号和密码
+            var username = $("#login input[name=account]").val();
+            var password = $("#login input[name=password]").val();
+            console.log("username: " + username + ", " + "password: " + password);
+            // 准备好了必须的参数后，开始发送post请求。post()方法和get()方法的参数及使用相同。
+            $.post(
+                // url， 请求的url一定要与请求的方法要求一致。
+                "http://api.duyiedu.com/api/student/stuLogin",
+                // 请求所需的参数。字段名与所需的参数名一致。
+                {
+                    appkey: "zhoudbw_1631780498232",
+                    account: username,
+                    password: password,
+                },
+                // 回调函数
+                function (data) {
+                    console.log(data);
+                },
+                // 返回数据的类型
+                "json"
+            );
+        });
+    </script>
+
+    <script>
+        // ajax()方法
+        $("#loginBtn2").click(function () {
+            $.ajax({
+                url: "http://api.duyiedu.com/api/student/stuLogin",
+                type: "post",
+                data: {
+                    appkey: "zhoudbw_1631780498232",
+                    account: $("#login input[name=account]").val(),
+                    password: $("#login input[name=password]").val()
+                },
+                // 请求成功时的回调函数
+                success: function (data) {
+                    console.log(data);
+                },
+                // 请求失败时的回调函数
+                error: function (status) {
+                    console.log("错误原因:" + status);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

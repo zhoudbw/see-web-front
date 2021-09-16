@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+</head>
+
+<body>
+    <!-- get请求 -->
+    <!-- get请求在jQuery中有两种方式，一个是get()方法、一个是ajax()方法，ajax()方法可以指代请求的方式 -->
+    <button id="get">get请求</button>
+    <button id="ajaxGet">ajax get请求</button>
+
+    <script>
+        $("#get").click(function () {
+            $.get(
+                //参数一：请求的url
+                "http://api.duyiedu.com/api/student/findAll",
+                //参数二：传递该url所需的参数
+                {
+                    //appKey:用户访问接口时所必须携带的身份凭据
+                    appkey: "zhoudbw_1631780498232"
+                },
+                //参数三：回调函数，该函数有个参数是data，data是请求成功后传递过来的参数集合
+                function (data) {
+                    console.log(data);
+                },
+                //参数四：控制请求到的数据的格式。现在请求到的数据类型是string，字符串无法直接去操作，如果用字符串的方式去操作就太麻烦了。
+                //通常我们都是将请求到的数据变成对象，便于我们通过各种循环遍历的方式对其进行操作。
+                "json"
+            );
+        });
+        /**
+         * 注意：当前我使用的地址是：http://127.0.0.1:5500/src/07-AJAX/index.html 本地的地址
+         * 而请求的是一个在线的地址，所以很显然是跨域了。Ajax是不允许跨域的。跨域的问题，该在线api在后端已经处理了。
+         */
+    </script>
+
+    <script>
+        //jQuery帮我们封装了一个非常核心的方法：ajax()，这个方法的参数非常的多。
+        //通过ajax()方法实现get请求
+        $("#ajaxGet").click(function () {
+            $.ajax(
+                // 所有的参数都放在下面这个对象中
+                {
+                    // 参数1：url地址
+                    url: "http://api.duyiedu.com/api/student/findAll",
+                    // 参数2：请求方式
+                    type: "get",
+                    // 参数3：请求需要发送的参数
+                    data: {
+                        // 该参数是一个对象。参数形式是key:value
+                        appkey: "zhoudbw_1631780498232",
+                    },
+                    // 参数4：请求成功之后的回调函数
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    // 参数5：请求到的数据类型
+                    dataType: "json",
+                }
+            );
+            /**
+             * 注1：上述参数无需全部使用。
+             * 注2：参数3传递参数的形式是使用对象，可以变成使用字符串类型。形式为："appkey=zhoudbw_1631780498232"
+             */
+        });
+    </script>
+</body>
+
+</html>

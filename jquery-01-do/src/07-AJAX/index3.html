@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+</head>
+
+<body>
+    <!-- json请求 -->
+    <button id="json">json请求</button>
+    <script>
+        // json请求。getJSON()和get()、post()的用法相同
+        $("#json").click(function () {
+            $.getJSON(
+                "http://api.duyiedu.com/api/student/findAll",
+                { appkey: "zhoudbw_1631780498232" },
+                function (data) {
+                    console.log("json请求: " + data);
+                }
+            );
+        });
+    </script>
+</body>
+
+</html>
