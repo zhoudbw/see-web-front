@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+</head>
+
+<body>
+    <!-- JSONP : JSON Width Padding -->
+    <button id="jsonp">jsonp</button>
+    <script>
+        $("#jsonp").click(function () {
+            $.ajax({
+                url: "http://developer.duyiedu.com/edu/testJsonp",
+                dataType: "jsonp",
+                method: "post",
+                success: function (data) {
+                    console.log(data);
+                }
+            });
+        });
+    </script>
+
+
+    <!-- 
+        jsonp原理在jQuery中是如何实现的？或者说
+        在jQuery中jsonp的实现步骤：当我们给定dataType:"jsonp"，是如何将请求转成jsonp的请求的。
+        第一步：通过ajax()发送一个请求，先要判断所给url是否同源。
+            如果是同源的，那么完全没有必要将请求变为jsonp。（因为jsonp是用来解决跨域的，现在是同源就不涉及到跨域了）
+            如果不是同源，那么就会按照jsonp请求的方式发送请求。这里要做的操作有很多：
+                1. 对发送的url进行改造（添加两个参数callback和_）。
+
+                2. 创建script标签，将改造好的地址赋值到script的srcs属性上。
+                    为什么jsonp都是转成get请求发送的呢？因为jsonp是通过script标签的src属性发送的请求，
+                    带src以及href属性的标签它们所发送的网络请求的方式只能是get而不能是post方式。
+                    所以即使在ajax()中指明method=post，发送的依旧是get请求。
+
+                    因为script:src自带发送网络请求，所以当我们将其添加到页面上，就自动发送请求了。
+                    这样我们的后端就能够收到数据了。收到数据之后，根据请求地址，将要返回的数据进行一些操作，
+                    操作之后就是我们想要的数据类型了。
+
+                3. 然后就通过callbackName({所需返回的数据});
+                    改造好的url：https://developer.duyiedu.com/edu/testJsonp?callback=jQuery36004463067839678787_1631878378308&_=1631878378309
+                    请求返回数据：jQuery36004463067839678787_1631878378308({"status":"ok","msg":"Hello! There is DuYi education!"})
+                4. 接收到这个数据之后，浏览器就会将其当做js代码去执行了。这个函数定义不能放在函数的调用之后，要先定义再调用。
+    -->
+
+    <!-- 先定义函数 -->
+    <script>
+        function fn(data) {
+            console.log("定义函数...");
+            console.log(data);
+        }
+    </script>
+    <!-- 再调用 -->
+    <script src="https://developer.duyiedu.com/edu/testJsonp?callback=fn"></script>
+</body>
+
+</html>

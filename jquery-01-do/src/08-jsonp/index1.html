@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+</head>
+
+<body>
+    <!-- JSONP : JSON Width Padding -->
+
+    <!-- 点击按钮发送jsonp方式的请求，请求结束返回结果 -->
+    <button id="jsonp1">未使用jsonp出现跨域问题</button><br><br>
+    <button id="jsonp2">使用jsonp并做初步的说明</button><br><br>
+    <button id="jsonp3">测试jsonp发送请求的方式</button><br><br>
+
+    <script>
+        $("#jsonp1").click(function () {
+            /* 不使用jsonp的方式请求 */
+            $.ajax({
+                url: "http://developer.duyiedu.com/edu/testJson",
+                success: function (data) {
+                    console.log(data);
+                }
+            });
+            /**
+             *报错（跨域）：
+             * Access to XMLHttpRequest at 'https://developer.duyiedu.com/edu/testJsonp' 
+             * (redirected from 'http://developer.duyiedu.com/edu/testJsonp') from origin 'http://127.0.0.1:5500' 
+             * has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. 
+             */
+        });
+    </script>
+
+    <script>
+        $("#jsonp2").click(function () {
+            $.ajax({
+                url: "http://developer.duyiedu.com/edu/testJsonp",
+                // "jsonp": 以 JSONP 的方式载入 JSON 数据块。会自动在所请求的URL最后添加 "?callback=?"。请求就成jsonp方式了。
+                // 默认情况下不会通过在URL中附加查询字符串变量 "_=[TIMESTAMP]" 进行自动缓存结果，除非将 cache参数设置为true。
+                dataType: "jsonp",
+                success: function (data) {
+                    console.log(data);
+                }
+                /**
+                 * 我们实际发送的请求为：http://developer.duyiedu.com/edu/testJsonp
+                 * 通过Network可知实际发送请求为：https://developer.duyiedu.com/edu/testJsonp?callback=jQuery36007516937707564868_1631838425212&_=1631838425213
+                 * 多了 callback=xxx 和 _=xxx。这是jsonp的特征。
+                 * 
+                 * 我们获取到的数据为：jQuery36007516937707564868_1631838425212({"status":"ok","msg":"Hello! There is DuYi education!"})
+                 * 这个返回的数据像什么：函数。
+                 * jQuery36007516937707564868_1631838425212作为函数名。这个函数名实际上就来自callback参数。
+                 * {"status":"ok","msg":"Hello! There is DuYi education!"}作为参数放在了函数内。
+                 * 
+                 * 再看我们实际发送的请求：https://developer.duyiedu.com/edu/testJsonp?callback=jQuery36007516937707564868_1631838425212&_=1631838425213
+                 * 参数1：callback,回调函数。其实就是异步的执行代码。当数据请求成功就会去调用callback值对应的回调函数。 —— 这个值实际上是实际生成的。
+                 * 参数2：_,时间戳。加上时间戳的意义就在于阻止浏览器缓存数据。为什么要阻止呢？缓存一下不是更好吗？这是为了避免数据更新后，前台不显示，显示的还是缓存的内容。
+                 *      时间戳一直是更新的，所以url一直是更新的。每次使用的都是新的，所以浏览器就不会缓存下来。
+                 */
+            });
+        });
+    </script>
+
+    <script>
+        $("#jsonp3").click(function () {
+            $.ajax({
+                url: "http://developer.duyiedu.com/edu/testJsonp",
+                dataType: "jsonp",
+                method: "post", // 使用post发送请求
+                success: function (data) {
+                    console.log(data);
+                }
+                /**
+                 * 即使使用了POST方式发送请求，发送的也就是GET请求。
+                 *  这是为什么呢？
+                 *    jQuery做了是否同源判断。
+                 *      当请求的地址和当前我所在的地址是同源的。那么设置了什么请求方式，就按照什么方式发送。
+                 *      当请求的地址和当前我所在的地址是不同源的，那么就跨域了，跨域一律将请求方式设置成get方式。
+                 */
+            });
+        });
+    </script>
+</body>
+
+</html>

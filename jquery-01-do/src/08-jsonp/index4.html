@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-3.6.0.js"></script>
+</head>
+
+<body>
+    <!-- JSONP : JSON Width Padding -->
+    <!-- JSONP的简单实现 （很多的细节都忽略了。）-->
+    <script>
+        // 这个jp是个对象，就好比jQuery中的$
+        var jp = {
+            // 这就好比jQuery中的ajax()方法，模仿jQuery的ajax()方式，给个对象类型的形参
+            ajax: function (options) {
+                // 没有做严谨的判断，不一定有获取的属性。
+
+                var url = options.url; // 用户发送请求的地址。
+                var dataType = options.dataType; // 用户传递过来的请求方式
+
+                // 下述两个变量是用来判断是否同源的
+                var targetProtocol = ""; // 用户地址的协议
+                var targetHost = ""; // 用户地址的域名和端口
+
+                /**
+                 * 为targetProtocol和targetHost赋值：
+                 *  用户传递的是相对地址还是绝对地址？
+                 *      比如，绝对地址：http://www.zhoudbw.cn
+                 *      比如，相对地址：js/data.json
+                 *  绝对地址可能是当前域，也能是其他域。
+                 *  相对地址肯定是同源（本地的）。
+                 */
+                if (url.indexOf("http://") == 0 || url.indexOf("https://") == 0) {
+                    // 这个条件成立：说明用户传递的是一个绝对地址。
+                    var targetUrl = new URL(url); // 将用户请求的地址包装成一个对象(实例化)。变成对象后，相应的就可以通过属性获取想要的域名等信息，而不是解析字符串。
+                    targetProtocol = targetUrl.protocol; // 放回地址对象的协议
+                    targetHost = targetUrl.host; // 返回地址对象的域名和端口
+                } else {
+                    // 代码走到这里：说明用户传入的地址是一个相对地址（同一个域，通过location取当前域的信息）
+                    targetProtocol = location.protocol;
+                    targetHost = location.host;
+                }
+
+                /**
+                 * 接下来就可以开始处理jsonp了，但是还要判断一下dataType是否等于jsonp
+                 */
+                if (dataType != "jsonp") {
+                    // 这个条件成立，说明用户的请求方式不是jsonp，那就直接返回
+                    return;
+                }
+                /**
+                 * 是jsonp需要处理
+                 */
+                // 是否同源的判断 (同源：协议、域名、端口都相等)
+                if (location.protocol == targetProtocol && location.host == targetHost) {
+                    // 条件成立：说明现在是同域
+                    // 没必要使用jsonp的方式发送请求，只需要发送一个普通的ajax请求就ok了。
+                    // .... (自己补充)
+                } else {
+                    // 不同域
+                    // 1. 改造url
+                    var callback = "tian" + Math.floor(Math.random() * 100000); // 随机生成一个函数名
+                    // var timestamp; // 一个参数演示一下就好了，时间戳参数不拼了。
+
+                    // 2. 生成script标签
+                    var script = document.createElement("script");
+                    /**
+                     * 这里拼接参数需要特别注意，用户的url可能携带参数，可能不携带参数，所以拼接时有如下情况：
+                     *  http://www.zhoudbw.cn/index?name=tian&callback=xxx&_=xxx
+                     *  http://www.zhoudbw.cn?callback=xxx&_=xxx
+                     * 要判断是拼接?还是拼接&
+                     */
+                    if (url.indexOf("?") > 0) {
+                        // 条件成立：说明用户传递的url有参数了，即存在?，此时拼接参数的时候是&
+                        script.src = url + "&callback=" + callback;
+                    } else {
+                        // 说明用户传递的url没有参数，即不存在?，此时凭借参数的时候是?
+                        script.src = url + "?callback=" + callback;
+                    }
+
+                    // 4. 按照先定义后调用，这里定义script:src请求调用的函数
+                    // 将生成的方法定义到window身上。window是个全局变量，在window身上定义了这个方法，那么调用的时候就不会是未定义了。
+                    window[callback] = options.success; // 这个方法由用户具体实现
+
+                    // 3. 将script标签加入到页面中，让script:src发送请求
+                    document.head.appendChild(script);
+                }
+
+
+            }
+        }
+    </script>
+
+    <script>
+        // 验证
+        jp.ajax({
+            url: "https://developer.duyiedu.com/edu/testJsonp",
+            dataType: "jsonp",
+            success: function(data) {
+                console.log("自定义...");
+                console.log(data);
+            }
+        });
+    </script>
+
+</body>
+
+</html>
