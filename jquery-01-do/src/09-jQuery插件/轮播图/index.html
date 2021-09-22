@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #1B1B1B
+        }
+
+        .demo {
+            width: 500px;
+            height: 300px;
+            margin: 50px auto;
+        }
+
+        .left-btn,
+        .right-btn {
+            font-family: "宋体";
+            opacity: .3;
+        }
+
+        .left-btn:hover,
+        .right-btn:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="demo"></div>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/index.js"></script>
+    <script>
+        $('.demo').slider({
+            imgList: [
+                {
+                    img: './img/t1.png',
+                    a: '#',
+                },
+                {
+                    img: './img/t2.png',
+                    a: '#',
+                },
+                {
+                    img: './img/t3.png',
+                    a: '#',
+                }
+            ], //图片的列表
+            width: 500, //图片的宽
+            height: 300, //图片的高
+            isAuto: true, //是否自动轮播
+            moveTime: 3000, //运动时间
+            direction: 'right', //轮播的方向
+            btnWidth: 30, //按钮的宽
+            btnHeight: 30, //按钮的高
+            spanWidth: 10, //span按钮的宽
+            spanHeight: 10, //span按钮的高
+            spanColor: '#fff', //span按钮的颜色
+            activeSpanColor: 'red', //选中的span颜色
+            btnBackgroundColor: 'rgba(0, 0, 0, 0.3)', //两侧按钮的颜色
+            spanRadius: '50%', //span按钮的圆角程度
+            spanMargin: 3, //span之间的距离
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/fullpage.css">
+    <script src="js/jquery-3.6.0.js"></script>
+    <script src="js/fullpage.js"></script> <!-- 依赖于jQuery -->
+    <style>
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        h2 {
+            margin: 0px;
+        }
+
+        #fullpage .section {
+            text-align: center;
+        }
+
+        #margin h2 {
+            color: #fff;
+            font-size: 80px;
+        }
+
+        #fp-nav ul li a span {
+            background: #fff;
+        }
+
+        .fp-controlArrow.fp-prev {
+            left: 50px;
+        }
+
+        .fp-controlArrow.fp-next {
+            right: 50px;
+        }
+
+        /* fullpage.css没有提供menu的样式，自己来写 */
+        #menu {
+            /* 不管怎么滚，menu都是在屏幕的最上面：固定定位。 */
+            position: fixed;
+            z-index: 1024;
+            width: 100%;
+            top: 0;
+            /* menu的高，通过line-height给撑开 */
+        }
+        #menu ul {
+            /* ul下的li要浮动，所以清楚浮动 */
+            overflow: hidden;
+        }
+        #menu li {
+            float: left;
+            margin: 0 15px;
+        }
+        #menu a {
+            color: #fff;
+            font-size: 18px;
+            line-height: 40px;
+            text-decoration: none;
+        }
+        #menu li.active a {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 锚点导航 HTML格式固定 -->
+    <ul id="menu">
+        <!-- class=active表示选中状态，所以class=active只设置了一个，有一个被默认选中就好 -->
+        <!-- 注：data-menuanchor的值是自定义的 -->
+        <li data-menuanchor="first" class="active"><a href="#first">第一屏</a></li>
+        <li data-menuanchor="second"><a href="#second">第二屏</a></li>
+        <li data-menuanchor="third"><a href="#third">第三屏</a></li>
+        <li data-menuanchor="fourth"><a href="#fourth">第四屏</a></li>
+    </ul>
+    <div id="fullpage">
+        <!-- 里面需要套div,每一个div都是一屏,且要求class=section -->
+        <div class="section">
+            <h2>第一屏</h2>
+        </div>
+        <div class="section">
+            <h2>第二屏</h2>
+        </div>
+        <div class="section">
+            <h2>第三屏</h2>
+            <!-- 修改HTML写法，实现左右分页的效果 -->
+            <div class="slide">
+                <h2>第三屏 第一页</h2>
+            </div>
+            <div class="slide">
+                <h2>第三屏 第二页</h2>
+            </div>
+            <div class="slide">
+                <h2>第三屏 第三页</h2>
+            </div>
+            <div class="slide">
+                <h2>第三屏 第四页</h2>
+            </div>
+        </div>
+        <div class="section">
+            <h2>第四屏</h2>
+        </div>
+    </div>
+    <script>
+        $("#fullpage").fullpage({
+            sectionsColor: ["#693AB8", "#a74a2a", "#48B7DB", "#b32e37"],
+            navigation: true,
+            navigationTooltips: ["第一屏", "第二屏", "第三屏", "第四屏"],
+            // 配置锚点对应，一定要和我们上面样式中给的data-menuanchor一致
+            anchors:["first", "second", "third", "fourth"],
+            // 配置联动的导航
+            menu: "#menu"
+        });
+    </script>
+</body>
+
+</html>

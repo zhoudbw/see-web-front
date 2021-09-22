@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/fullpage.css">
+    <script src="js/jquery-3.6.0.js"></script>
+    <script src="js/fullpage.js"></script> <!-- 依赖于jQuery -->
+    <style>
+        h2{
+            margin: 0px;
+        }
+        #fullpage .section{
+            text-align: center;
+        }
+        #margin h2{
+            color: #fff;
+            font-size: 80px;
+        }
+        /* 配置测边导航的小圆点的颜色，
+        有了css文件，那么怎么改都难不倒我们，
+        可以直接修改引入的fullpage.css文件，也可在我们的文件中定位来修改样式 */
+        #fp-nav ul li a span {
+            background: #fff;
+        }
+        /* 修改fullpage.css内左右分屏时，箭头的显示位置 */
+        .fp-controlArrow.fp-prev{
+            left: 50px;
+        }
+        .fp-controlArrow.fp-next{
+            right: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="fullpage">
+        <!-- 里面需要套div,每一个div都是一屏,且要求class=section -->
+        <div class="section">
+            <h2>第一屏</h2>
+        </div>
+        <div class="section">
+            <h2>第二屏</h2>
+        </div>
+        <div class="section">
+            <h2>第三屏</h2>
+            <!-- 修改HTML写法，实现左右分页的效果 -->
+            <div class="slide"><h2>第三屏 第一页</h2></div>
+            <div class="slide"><h2>第三屏 第二页</h2></div>
+            <div class="slide"><h2>第三屏 第三页</h2></div>
+            <div class="slide"><h2>第三屏 第四页</h2></div>
+        </div>
+        <div class="section">
+            <h2>第四屏</h2>
+        </div>
+    </div>
+    <!-- 使用fullpage.js将div分成一个一个屏 -->
+    <script>
+        // fullpage()支持对象参数
+        $("#fullpage").fullpage({
+            // 参数类型：数组。和屏幕的个数相同，指定每个屏幕的颜色。
+            sectionsColor:["#693AB8", "#a74a2a", "#48B7DB", "#b32e37"],
+            // 配置测边导航圆点是否显示。true显示，默认false
+            navigation:true,
+            // 设置导航圆点的提示信息
+            navigationTooltips: ["第一屏", "第二屏", "第三屏", "第四屏"],
+        });
+    </script>
+</body>
+</html>

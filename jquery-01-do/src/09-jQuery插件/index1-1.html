@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <!-- 引入fullpage.css -->
+    <link rel="stylesheet" href="css/fullpage.css">
+    <!-- 引入jQuery.js和fullpage.js -->
+    <script src="js/jquery-3.6.0.js"></script>
+    <script src="js/fullpage.js"></script> <!-- 依赖于jQuery -->
+    <style>
+        h2{
+            margin: 0px;
+        }
+        #fullpage .section{
+            text-align: center;
+        }
+        #margin h2{
+            font-size: 80px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 全屏滚动的网址：https://alvarotrigo.com/fullPage/zh/
+         使用方式：下载zip文件、解压得到很多文件、找到dist目录、引入fullpage.js和fullpage.css -->
+
+    <!-- 使用fullPage插件 -->
+
+    <!-- HTML格式必须按照如下形式书写 -->
+    <!-- id=fullpage的div是最外层的 -->
+    <div id="fullpage">
+        <!-- 里面需要套div,每一个div都是一屏,且要求class=section -->
+        <div class="section">
+            <h2>第一屏</h2>
+        </div>
+        <div class="section">
+            <h2>第二屏</h2>
+        </div>
+        <div class="section">
+            <h2>第三屏</h2>
+        </div>
+        <div class="section">
+            <h2>第四屏</h2>
+        </div>
+    </div>
+    <!-- 使用fullpage.js将div分成一个一个屏 -->
+    <script>
+        $("#fullpage").fullpage();
+    </script>
+</body>
+</html>
