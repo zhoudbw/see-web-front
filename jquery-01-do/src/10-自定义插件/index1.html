@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/jquery-3.6.0.js"></script>
+</head>
+<body>
+    <script>
+        /**
+         * 自定义插件有两种方式：
+         *  1. 给jQuery对象本身拓展方法 —— jQuery本身加方法 （使用方式：$.method()）
+         *  2. 给jQuery DOM对象拓展方法 —— 页面上获取到的DOM对象加方法 （使用方式： $("选择器").method()）
+         */
+    </script>
+
+    <script>
+        // 给jQuery本身拓展方法，通过extend()方法
+        // 参数为对象，传递需要拓展的方法即可。
+        $.extend({
+            lg: function(value) {
+                console.log(value);
+            },
+            lg2: function(value2) {
+                console.log(value2);
+            }
+        });
+        // 调用extend()拓展的方法
+        $.lg("胖小甜");
+        $.lg2("呆小甜");
+    </script>
+
+    <h1>肥小甜</h1>
+    <script>
+        // 方式1：给DOM对象拓展方法，通过$.fn.extend()方法
+        // 参数为对象，传递需要拓展的方法即可
+        $.fn.extend({
+            changeColor: function() {
+                // $(this) 指向使用的DOM对象，更加的灵活
+                $(this).css("color", "red");
+                return $(this); // 返回该对象，支持链式调用 
+            }
+        })
+        // 方式2：给DOM对象拓展方法，通过$.fn.method= function(){}方法
+        $.fn.changeSize = function() {
+            $(this).css("fontSize", 50);
+            return $(this);
+        }
+
+        // 调用fn拓展的方法
+        $("h1").changeColor().changeSize();
+    </script>
+</body>
+</html>

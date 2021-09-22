@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/jquery-3.6.0.js"></script>
+</head>
+
+<body>
+    <!-- html演示结构 -->
+    <style>
+        #box, #drag{
+            width: 200px;
+            height: 200px;
+            background: green;
+        }
+
+        #drag {
+            background: skyblue;
+        }
+    </style>
+    <div id="box"></div>
+    <div id="drag"></div>
+
+    <!-- 封装拖拽的插件 -->
+    <script>
+        $.fn.draggable = function (options) {
+            // 处理options不传参的情况，用户如果传参那么值为options，否则为空对象{}
+            options = options || {};
+            // 处理options传参，但是传参不完全的情况
+            options.limit = options.limit || false;
+
+            /*将this存储起来,确保每次使用的都是我们需要的DOM对象*/
+            var This = $(this);
+
+            // 修改DOM元素的样式,拖拽需要left值和top值,就要用到定位
+            // 但是为了用户简单,给我一个div我来处理其他的东西
+            $(this).css({
+                position: "absolute",
+                left: 0,
+                top: 0,
+                cursor: "move", // 改变鼠标的样式
+            });
+
+            // 记录鼠标点击下的位置,使用鼠标移动的位置,然后做减法,就可以知道拖拽到哪里了.
+            $(this).mousedown(function (ev) {
+                // ev.pageX是jQuery内封装好的获取鼠标距离左边距的距离
+                // ev.pageY是jQuery内封装好的获取鼠标距离上边距的距离
+                var disX = ev.pageX - $(this).offset().left;
+                var disY = ev.pageY - $(this).offset().top;
+
+                // 严谨:让移动在我们可见范围内,使用$(document)
+                $(document).mousemove(function (ev) {
+                    // 移动过程中需要使用事件对象ev,因为需要获取移动的位置
+                    var l = ev.pageX - disX;
+                    var t = ev.pageY - disY;
+
+                    /* 限制有范围的拖拽,对l和t进行处理 */
+                    // 如果用户传递了limit:true,就要处理拖拽的范围了
+                    if (options.limit) {
+                        if (l < 0) {
+                            l = 0; // 限制左边的范围
+                        } else if (l > $(document).innerWidth() - This.outerWidth) {
+                            l = $(document).innerWidth() - This.outerWidth(); // 限制右边的范围
+                        }
+
+                        if (t < 0) {
+                            t = 0; // 限制上边的范围
+                        } else if (t > $(document).innerHeight() - This.outerHeight) {
+                            t = $(document).innerHeight() - This.outerHeight(); // 限制右边的范围
+                        }
+                    }
+
+                    // $(this) // 这个this是指document,而不是DOM对象,不可用
+                    This.css({
+                        left: l,
+                        top: t,
+                    });
+
+                }); // 鼠标移动事件
+
+                // 鼠标抬起事件
+                $(document).mouseup(function () {
+                    // 接触事件
+                    $(this).off();
+                });
+                // 清除事件的默认行为,拖拽文字的时候可能会出现这个问题
+                return false;
+
+            }); // 鼠标按压事件
+        };
+    </script>
+
+    <script>
+        // 调用封装的拖拽插件
+        $("#box").draggable({
+            // 扩展一个参数，限制拖拽范围
+            limit: true,
+        });
+
+        // 调用封装的拖拽插件
+        $("#drag").draggable();
+    </script>
+
+</body>
+
+</html>
