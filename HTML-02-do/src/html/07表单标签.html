@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title>表单标签</title>
+    </head>
+    <body>
+        <form action="save">
+            <ul>
+                <li><input type="text" name="cno" value="1001" /></li>
+                <li><input type="text" name="cname" value="readonly" readonly="readonly" /></li>
+                <li><input type="text" name="color" value="disabled" disabled="disabled" /></li>
+                <li><input type="text" name="price" /></li>
+                <li><input type="text"></li>
+
+                <li>密码输入框：<input type="password"></li>
+                <li>数字输入框：<input type="number"></li>
+
+                <li>单选按钮：
+                    <input type="radio" name="sex" value="男" checked=“checked>男
+                    <input type="radio" name="sex" value="女">女
+                </li>
+
+                <li>单选按钮：
+                    <label><input type="radio" name="sex2" value="男" checked=“checked>男</label>
+                    <label><input type="radio" name="sex2" value="女">女</label>
+                </li>
+                
+                <li>复选框：
+                    <label><input type="checkbox" name="hobby" value="足球">足球</label>
+                    <label><input type="checkbox" name="hobby" value="篮球">篮球</label>
+                    <label><input type="checkbox" name="hobby" value="排球">排球</label>
+                </li>
+
+                <li>下拉列表：
+                    <select name="province">
+                        <option value="hlg">黑龙江</option>
+                        <option selected="selected">吉林</option>
+                        <option>辽宁</option>
+                    </select>
+                </li>
+
+                <li>文本域：
+                    <textarea name="textarea" id="" cols="50" rows="3"></textarea>
+                </li>
+
+                <li>文件上传选择框：
+                    <input type="file">
+                </li>
+
+                <li>隐藏域：
+                    <input type="hidden" name="hidden">
+                </li>
+
+                <li><button>提交</button></li>
+                <li><input type="reset" value="重置"></li>
+                <li><input type="button" value="普通按钮"></li>
+            </ul>
+        </form>
+    </body>
+</html>

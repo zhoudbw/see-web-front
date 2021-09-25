@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <title>表格标签</title>
+    </head>
+    <body>
+        <table width="500" border="1" cellspacing="0">
+            <!-- 头 -->
+            <thead>
+                <!-- 1行 -->
+                <tr valign="bottom" align="right" height="50">
+                    <!-- 单元格 -->
+                    <!-- <td>名称</td>
+                    <td>颜色</td>
+                    <td>价格</td> -->
+                    <th>名称</th>
+                    <th>颜色</th>
+                    <th>价格</th>
+                </tr>
+            </thead>
+
+            <!-- 内容 -->
+            <tbody>
+                <!-- 2行 -->
+                <tr>
+                    <td align="right" valign="bottom" height="50">夏利</td>
+                    <td>红色</td>
+                    <!-- 纵向合并两个单元格 -->
+                    <td rowspan="2">100000</td>
+                </tr>
+                <tr>
+                    <td>本田</td>
+                    <td>黑色</td>
+                </tr>
+            </tbody>
+
+            <!-- 尾 -->
+            <tfoot>
+                <!-- 1行 -->
+                <tr>
+                    <!-- 横向合并两个单元格 -->
+                    <td colspan="2">汇总：</td>
+                    <td>300000</td>
+                </tr>
+            </tfoot>
+
+        </table>
+    </body>
+</html>
