@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <title>选择器</title>
+        <!-- 后代选择器 -->
+        <style>
+            p a {
+                color: red;
+            }
+        </style>
+        <!-- 后代选择器 补充 -->
+        <style>
+            /* 后代不一定是直接后代 */
+            p a {
+                color: green;
+            }
+            /* 可适用多级后代选择器 */
+            p b a {
+                color: yellow;
+            }
+        </style>
+
+        <!-- 直接后代选择器 -->
+        <style>
+            p > a {
+                background: blue;
+            }
+        </style>
+
+        <!-- 相邻兄弟选择器 -->
+        <style>
+            p + a {
+                color: blueviolet;
+            }
+        </style>
+
+        <!-- 相邻兄弟同胞选择器 -->
+        <style>
+            p ~ a {
+                font-size: 30;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- 后代选择器 -->
+        <!-- 直接后代选择器 -->
+        <p>
+            <a>1111</a>
+            <font>
+                <a>2222</a>
+            </font>
+            <b>3333</b>
+        </p>
+        <a>4444</a>
+        <li>
+            <a>5555</a>
+        </li>
+        <p>
+            <b>
+                <a>6666</a>
+            </b>
+        </p>
+        <!-- 相邻兄弟选择器 -->
+        <!-- 相邻兄弟同胞选择器 -->
+        <p>
+            <b>111</b>
+        </p>
+        <a>222</a>
+        <a>666</a>
+        <p>333</p>
+        <b>444</b>
+        <a>555</a>
+    </body>
+</html>

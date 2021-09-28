@@ -1,0 +1,39 @@
+<html>
+
+<head>
+  <title>伪类选择器</title>
+  <style>
+    a {
+      font-size: 30;
+    }
+
+    /* 未发送请求状态的设计 */
+    a:link {
+      color: black;
+    }
+
+    /* 已经发送请求后状态的设计 */
+    a:visited {
+      color: yellowgreen;
+    }
+
+    /* 鼠标悬停状态的设计 */
+    a:hover {
+      color: pink;
+    }
+
+    /* 正在发送请求状态的设计 */
+    a:active {
+      color: teal;
+    }
+  </style>
+</head>
+
+<body>
+  <a href="http://www.baidu.com">百度</a>
+  <a href="http://www.jd.com">京东</a>
+  <a href="http://www.taobao.com">淘宝</a>
+  <a href="http://www.google.com">谷歌</a>
+</body>
+
+</html>

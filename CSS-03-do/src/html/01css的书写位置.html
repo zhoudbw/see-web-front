@@ -1,0 +1,43 @@
+<html>
+
+<head>
+    <title>样式使用</title>
+    <meta charset="utf-8">
+    <style>
+        p {
+            font-size: 20px;
+        }
+    </style>
+    <style>
+        /* 引入外部css文件 */
+        /* 地址可写：相对地址、绝对地址 || 本地地址、网络地址 */
+        @import url(../css/01.css);
+    </style>
+
+    <!--对于<link>引入css文件，ref="stylesheet type="text/css不可少 -->
+    <!--理由：
+            <link>不同于<style>，<style>只能够引入css文件，而<link>可以引入其他类型的文件
+            当使用<link>的href属性引入css文件的时候，实际上是请求该css文件的数据
+            数据通过流(字节)的形式响应给浏览器，浏览器要对这些字节进行重新的组装、使用。-->
+    <!--这时rel和type就起到了作用：
+                组装特点按照rel属性传递的参数组装，即stylesheet
+                按照样式表的方式组装，但是不一定当作样式表来使用，
+                    type属性传递的参数，就是用来告诉浏览器这个组装的内容的作用，即当作css/text来使用 -->
+    <link rel="stylesheet" type="text/css" href="../css/011.css">
+</head>
+
+<body>
+    中国
+    <font style="color:blue; font-size:20" size="7">中国</font>
+    <p style="color: blue;">中国</p>
+    <p style="color: blue;">美国</p>
+    <p style="color: blue;">法国</p>
+
+    <ul>
+        <li>星期1</li>
+        <li>星期2</li>
+        <li>星期3</li>
+    </ul>
+</body>
+
+</html>

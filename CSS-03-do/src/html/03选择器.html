@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title>选择器</title>
+        <!-- 标签选择器 -->
+        <style>
+            a {
+                color: aqua;
+            }
+            p {
+                color: blue;
+            }
+        </style>
+
+        <!-- 类选择器 -->
+        <style>
+            .c1 {
+                font-size: 20px;
+            }
+        </style>
+        <!-- 类选择器拓展 -->
+        <style>
+            .c2 {
+                font-family: 楷体;
+            }
+        </style>
+
+        <!-- id选择器 -->
+        <style>
+            #d1 {
+                color: green;
+            }
+        </style>
+
+        <!-- 属性选择器 -->
+        <style>
+            input[name=sex] {
+                color: red;
+            }
+        </style>
+
+        
+    </head>
+    <body>
+        <!-- 样板代码 -->
+        <a>一月</a>
+        <a class="c1 c2">二月</a>
+        <p class="c2">星期一</p>
+        <p class="c1" id="d1">星期二</p>
+        <ul>
+            <li id="d1">一季度</li>
+            <li id="d1">二季度</li>
+            <li>三季度</li>
+        </ul>
+        <input type="text" name="sex" value="男" readonly="readonly">
+        <input type="text" name="sex" value="女" readonly="readonly">
+        <input type="text" name="hobby" value="球球
+        " readonly="readonly">
+    </body>
+</html>
