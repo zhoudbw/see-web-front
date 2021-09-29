@@ -1,0 +1,50 @@
+<html>
+<head>
+    <title>边框属性、轮廓属性</title>
+    <style>
+        a {
+            font-size: 2em
+        }
+        /* 不指定位置 */
+        .a1 {
+            border-width: 3px; /*边框粗细*/
+            border-color: #f40; /*边框颜色*/
+            border-style: solid; /*边框形状 solid实线 dashed虚线 dotted点状线*/
+        }
+        /* 缩写 */
+        .a2 {
+            border: 3px blue solid;
+        }
+        /* 细致 */
+        .a3 {
+            border-top-width: 3px;
+            border-top-color: purple;
+            border-top-style: dashed;
+            /* bottom、left、right对应也有上述样式 */
+        }
+        /* 边框圆角 */
+        .a4 {
+            border: 3px teal solid;
+            border-radius: 10px;
+        } 
+        /* 画圆形 */
+        .a4 + p {
+            height: 200px;
+            width: 200px;
+            border: 3px #f00 solid;
+            border-radius: 100px;
+            /* 圆角不仅可以同意改变所有角的圆滑度 */
+            /* 还可以为四个角分别设置 */
+            /* 当然也可以设置不同的x,y值来画椭圆 */
+        }
+    </style>
+</head>
+<body>
+    <a class="a1">中华人民共和国</a>
+    <a class="a2">中华人民共和国</a>
+    <a class="a3">中华人民共和国</a>
+    <a class="a4">中华人民共和国</a>
+    <p>圆</p>
+    <a class=" a4 a5">中华人民共和国</a>
+</body>
+</html>

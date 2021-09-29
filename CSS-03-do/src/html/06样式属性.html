@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <title>文字属性</title>
+        <style>
+            /* 设置文字颜色 */
+            p {
+                color: red;
+                color: rgb(255, 255, 0);
+                color: #008c8c;
+            }
+            /* 设置文字大小 */
+            .c1 {
+                font-size: 32px;  
+            }
+            .c2 {
+                font-size: 2em;
+            }
+            /* 设置文字字体 */
+            * {
+                font-family: '楷体', 'Times New Roman';
+            }
+            /* 设置文字水平位置 */
+            .c1,.c2 {
+                text-align: center;
+            }
+            /* 设置行高 */
+            a {
+                font-size: 16px;
+                line-height: 32px;
+            }
+            /* 设置文字左右间距 */
+            .a1 {
+                letter-spacing: 1em;
+            }
+            .a3 {
+                letter-spacing: -6px;
+            }
+            /* 设置文字粗细 */
+            /* <br/>标签会影响选择器的选择，<br/>标签也要算作一个真实存在的标签 */
+            a[class=a1] + br + a{
+                font-weight: bolder;
+            }
+            /* 设置文字修饰 */
+            .p1 {
+                text-decoration: overline;
+            }
+            .p1 ~ p {
+                text-decoration: line-through;
+            }
+            .p1 + p + p {
+                text-decoration: underline;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <p class="c1">中华人民共和国</p>
+        <p class="c2">中华人民共和国</p>
+        <p>中华人民共和国</p>
+        <p>Chinese</p>
+
+        <a class="a1">星期一</a>
+        <br/>
+        <a>星期二</a>
+        <br/>
+        <a class="a3">星期三</a>
+
+        <p class="p1">0001</p>
+        <p>0002</p>
+        <p>0003</p>
+    </body>
+</html>

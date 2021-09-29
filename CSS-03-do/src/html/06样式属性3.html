@@ -1,0 +1,72 @@
+<html>
+<head>
+    <title>背景属性、列表属性</title>
+    <!-- 设置背景属性 -->
+    <style>
+        p {
+            width: 300px;
+            height: 200px;
+            border: 2px teal solid;
+            text-align: center;
+            line-height: 200px;
+            color: #f40;
+
+            /* 设置背景颜色 */
+            background-color: cadetblue;
+            /* 设置背景图片 */
+            background-image: url(../img/dog.jpg);
+        }
+
+        p {
+            /* 设置背景图片平铺状态 - 属性覆盖 */
+            background-image: url(../img/favicon64.ico);
+            background-repeat: repeat-x;
+        }
+
+        p {
+            /* 设置背景图片引入位置 - 属性覆盖 */
+            background-image: url(../img/favicon64.ico);
+            background-repeat: no-repeat;
+            background-position: center top;
+        }
+    </style>
+    <!-- 设置列表属性 -->
+    <style>
+        li {
+            list-style-type: circle; 
+        }
+    </style>
+    <!-- 设置表格属性 -->
+    <style>
+        table,td {
+            border: 2px #000 solid;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<body>
+    <p>我肥小甜就是胖，咋滴，不服来战~~~</p>
+    <li>星期一</li>
+    <li>星期二</li>
+    <table width="200">
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

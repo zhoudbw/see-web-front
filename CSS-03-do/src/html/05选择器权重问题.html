@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>选择器权重问题</title>
+        <style>
+            /* 1 */
+            p {
+                color: red;
+            }
+            /* 1 */
+            p {
+                color: blue;
+                font-size: 20;
+            }
+            /* 10 */
+            .c1 {
+                background: yellow;
+            }
+            /* 100 */
+            #d1 {
+                background: gray;
+            }
+            /* 1 10 => 11 */
+            p.c1 {
+                background: blueviolet;
+            }
+            
+            .c2 {
+                background: orange !important; 
+            }
+
+        </style>
+    </head>
+    <body>
+        <!-- 1000 -->
+        <p class="c1" id="d1" style="background: pink;">星期一</p>
+        <p class="c2" style="background: yellow;">星期二</p>
+        <p>星期三</p>
+        <p>星期四</p>
+    </body>
+</html>

@@ -1,0 +1,25 @@
+<html>
+<head>
+  <title>选择器</title>
+  <style>
+    /* 选择器同时满足，才可别选中 */
+    /* 设置class=cl的选择器的标签 */
+    li.c1 {
+      color: red;
+    }
+    /* 属性选择器 */
+    li[class=c2] {
+      font-size: 20;
+      color: purple;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li class="c1">1</li>
+    <li class="c2">2</li>
+    <li>3</li>
+  </ul>
+  <a class="c1">4</a>
+</body>
+</html>
