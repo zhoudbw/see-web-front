@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title>盒模型属性</title>
+        <style>
+ 
+            div.d3 {
+                width: 80%;
+                height: 100px;
+                background: blue;
+                /* 设置最小宽度 */
+                min-width: 800px;
+            }
+            /* 解决内容超出最大宽高 */
+            .d4 {
+                width: 100px;
+                height: 100px;
+                background: yellow;
+                overflow: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="d3">星期三</div>
+        <div class="d4">
+            <ul>
+                <li>星期四</li>
+                <li>星期四</li>
+                <li>星期四</li>
+                <li>星期四</li>
+                <li>星期四</li>
+                <li>星期四</li>
+            </ul>
+        </div>
+    </body>
+</html>

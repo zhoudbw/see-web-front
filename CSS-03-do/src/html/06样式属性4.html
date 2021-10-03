@@ -1,8 +1,27 @@
 <html>
     <head>
         <title>盒模型属性</title>
+        <style>
+            .d1 {
+                width: 100px;
+                height: 100px;
+                background: red;
+            }
+            div.d2 {
+                width: 100px;
+                height: 100px;
+                background: pink;
+            }
+            /* 更改display属性 */
+            div {
+                /* display: inline; */
+                /* display: none; */
+                display: inline-block;
+            }
+        </style>
     </head>
     <body>
-        <div>星期</div>
+        <div class="d1">星期一</div>
+        <div class="d2">星期二</div>
     </body>
 </html>
