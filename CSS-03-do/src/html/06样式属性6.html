@@ -1,0 +1,32 @@
+<html>
+   <head>
+       <title>定位属性</title>
+       <style>
+           .d1 {
+               width: 100px;
+               height: 100px;
+               background: red;
+               text-align: center; /*文字水平居中*/
+               line-height: 100px; /*文字垂直居中*/
+               font-weight: bold;
+
+               border-radius: 50px;
+
+               right: 0px;
+               position: absolute;
+           }
+           .d2 {
+               width: 500px;
+               height: 500px;
+               background: #eee;
+               position: absolute;/*不指定该属性，d1的参考标准是浏览器窗口。设置了，参考的是父级标签*/
+           }
+       </style>
+   </head>
+   <body>
+       <div class="d2">
+           <div class="d1">星期一</div>
+           星期二
+       </div>
+   </body>
+</html>

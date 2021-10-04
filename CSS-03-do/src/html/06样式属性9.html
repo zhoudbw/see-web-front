@@ -1,0 +1,34 @@
+<html>
+   <head>
+       <title></title>
+       <style>
+           li {
+               width: 100px;
+               height: 100px;
+
+               list-style-type: none;
+           }
+           /* 清除li,ul和窗口边缘的距离 */
+           ul,li {
+               /* 不知道是内边距还是外边距产生的距离，直接全清 */
+               margin: 0;
+               padding: 0;
+           }
+           .l2 {
+               float: left;
+               height: 20px;
+           }
+           /* 使用浮动，让所有的li横向摆放 */
+           li {
+               float: left;
+           }
+       </style>
+   </head>
+   <body>
+       <ul>
+           <!-- 放到同一行，防止中间出现空格 -->
+           <li style="background:red"></li><li class="l2" style="background:blue"></li><li style="background:green"></li><li style="background:yellow"></li>
+       </ul>
+       
+   </body>
+</html>
