@@ -27,6 +27,11 @@ export default {
             todoId: '' // 默认选中id
         };
     },
+    watch: {
+        'todoId'(id) {
+            this.$router.push({ name: 'todo', params: { id: id } });
+        }
+    },
     created() { // 调用请求菜单列表数据的接口
         getTodoList({}).then(res => {
             const TODOS = res.data.todos; // 数据都会返回在res.data里面。
