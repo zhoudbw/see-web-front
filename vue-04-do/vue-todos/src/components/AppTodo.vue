@@ -86,7 +86,7 @@ export default {
         }
     },
     created() {
-        // created生命周期，在实例已经创建完成，页面还没渲染时调用init方法。
+        console.log( "Oh, init the page named 'AppTodo'. " )
         this.init();
     },
     methods: {
@@ -137,7 +137,7 @@ export default {
             addRecord({id: ID, text: this.text}).then(res => {
                 this.text = '';
                 this.init();
-                // this.$store.dispatch('getTodo');
+                this.$store.dispatch('getTodo');
             });
         },
         updateTodo() {
@@ -145,8 +145,7 @@ export default {
             editTodo({
                 todo: this.todo
             }).then(data => {
-                // _this.init();
-                // _this.$store.dispatch('getTodo');
+                _this.$store.dispatch('getTodo');
             });
         },
         updateTitle() {

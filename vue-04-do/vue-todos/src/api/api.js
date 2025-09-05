@@ -30,7 +30,3 @@ export const editRecord = params => {
 export const addTodo = params => {
     return axios.post(`/todo/addTodo`, params).then(res => res.data);
 };
-
-// export const editUser = params => { return axios.get(`${base}/user/edit`, { params: params }); };
-
-// export const addUser = params => { return axios.get(`${base}/user/add`, { params: params }); };

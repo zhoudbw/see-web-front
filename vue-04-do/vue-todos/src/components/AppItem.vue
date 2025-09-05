@@ -112,7 +112,7 @@ export default {
                 index: this.index
             }).then(data => {
                 this.init();
-                // this.$store.dispatch('getTodo');
+                this.$store.dispatch('getTodo');
             }).catch(error => {
                 console.error('更新失败:', error);
                 // 可以恢复状态或显示错误提示

@@ -1,10 +1,14 @@
+<!--
+ --
+-->
 <template>
-    <!--绑定点击事件goList),并且判断当todoId 时候 item.id时,文字高亮度-->
     <div class="list-todos">
-        <!-- 绑定class，当items循环中的id等于我们设置的选中todoId时候,就会加上active这个calss,这样样式就会发生变化。-->
-        <a @click="goList(item.id)" class="list-todo list activeListClass" :class="{'active': item.id === todoId}"
-           v-for="(item,index) in items" :key="index">
-            <!-- 把以前的item换成todoList -->
+        <!-- 
+          -- 修改当前选中的id
+          -- 并修改高亮状态
+         -->
+        <a @click="changeCurChooseId(item.id)" class="list-todo list activeListClass" :class="{'active': item.id === todoId}"
+           v-for="( item,index ) in todoList" :key="index">
             <span class="icon-lock" v-if="item.locked"></span>
             <span class="count-list" v-if="item.count > 0">{{ item.count }}</span>
             {{ item.title }}
@@ -17,42 +21,100 @@
 </template>
 
 <script>
-// 引入分装好的API函数
-import {addTodo, getTodoList} from '@/api/api';
-
+import {addTodo} from '@/api/api';  // 引入封装好的两个接口函数
 export default {
     data() {
         return {
-            items: [], // 菜单数据
-            todoId: '' // 默认选中id
+            todoId: '', // 默认选中id,
         };
     },
-    watch: {
-        'todoId'(id) {
-            this.$router.push({ name: 'todo', params: { id: id } });
+    computed: {
+        todoList() {
+            return this.$store.getters.getTodoList;
         }
     },
-    created() { // 调用请求菜单列表数据的接口
-        getTodoList({}).then(res => {
-            const TODOS = res.data.todos; // 数据都会返回在res.data里面。
-            this.items = TODOS; // 菜单数据赋值给定义的this.items
-            this.todoId = TODOS[0].id; // 把菜单数据的默认的第一个对象的id赋值给默认选中的id
-        });
+    watch: {
+        /**
+         * 监听todoList,newList和oldList对比 [ 删除待办标题阶段 ]
+         * 此时,将当前选中的todoId变化为存在列表的第一个
+         */
+        todoList: {
+            handler(newList, oldList) {
+                // 更完善的安全检查
+                if (!Array.isArray(newList) || !Array.isArray(oldList)) return;
+                if (newList.length === 0) return;
+
+                // 只有当列表减少且新列表不为空时才触发
+                if (newList.length < oldList.length) {
+                    const firstItem = newList[0];
+                    if (firstItem?.id) {
+                        this.changeCurChooseId(firstItem.id);
+                    }
+                }
+            },
+        },
+
+        /**
+         * 选中的id发生变化,请求待办单项列表数据
+         * 渲染AppTodo,放置在AppLayout的<router-view/>处
+         */
+        todoId: {
+            handler(id) {
+                if (!id) return;
+
+                // 避免不必要的路由跳转（防止循环）
+                if (this.$route.params.id !== id) {
+                    this.$router.push({
+                        name: 'todo',
+                        params: { id: id }
+                    }).catch(err => {
+                        // 避免重复导航的错误
+                        if (err.name !== 'NavigationDuplicated') {
+                            console.error('路由跳转失败:', err);
+                        }
+                    });
+                }
+            },
+        }
     },
+
+    // 调用请求菜单列表数据的接口
+    created() {
+        console.log( "Oh, init the page named 'AppMenus'. " )
+
+        this.$store.dispatch( 'getTodo' ).then(() => {
+            this.$nextTick( () => {
+                // 确保 todoList 存在且有数据
+                if ( this.todoList && this.todoList.length > 0 ) {
+                    this.changeCurChooseId( this.todoList[ 0 ].id );
+                }
+            } );
+        } ).catch( error => {
+            console.error('Oh, Load todo_list failed:', error );
+        } );
+    },
+
     methods: {
-        goList(id) { // 点击菜单时候,替换选中id
+        // 修改当前选中的todoId
+        changeCurChooseId(id) {
             this.todoId = id;
         },
-        addTodoList() { // 点击新增按钮时候
-            // 调用新增菜单的接口，在接口调用成功在请求数据
-            addTodo({}).then( data => {
-                console.log( data )
-                getTodoList({}).then(res => {
-                    const TODOS = res.data.todos;
-                    this.todoId = TODOS[TODOS.length - 1].id;
-                    this.items = TODOS;
-                });
-            });
+
+        addTodoList() {
+            addTodo( {} ).then( data => {
+                this.$store.dispatch( 'getTodo' ).then(() => {
+                    this.$nextTick( () => {
+                        /**
+                         * 新增待办标题时,将todoId变为新加入的项
+                         */
+                        if ( this.todoList && this.todoList.length > 0 ) {
+                            this.changeCurChooseId( this.todoList[ this.todoList.length - 1 ].id );
+                        }
+                    } );
+                } );
+            } ).catch( error => {
+                console.error( 'Oh,increase new todo failed:', error );
+            } );
         }
     }
 };
@@ -61,3 +123,4 @@ export default {
 <style lang="less">
 @import '../common/style/menu.less';
 </style>
+
